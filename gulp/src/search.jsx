@@ -60,7 +60,7 @@ var SearchForm = React.createClass({
         <select id="geocode" name="geocode" value={this.state.distance} onChange={this._handleDistanceChange}>
           {selectOptions}
         </select>
-        &nbsp;km&nbsp;圏内圏内&nbsp;&nbsp;
+        &nbsp;km&nbsp;圏内&nbsp;&nbsp;
         <span className="search-word">
           <input type="text" id="query" name="q" value={this.state.query} placeholder={queryPlaceholder} onChange={this._handleQueryChange} style={{width: 230 + 'px'}} />
         </span>
