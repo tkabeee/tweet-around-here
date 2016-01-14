@@ -5,7 +5,7 @@ var SearchBox = React.createClass({
   render: function() {
     return (
 
-      <div id="searchBox" class="search">
+      <div id="searchBox" className="search">
       </div>
 
     );
