@@ -37,8 +37,8 @@ gulp.task("compass", function(){
 
 var path_react = {
   OUT: "build.js",
-  DEST_BUILD: "../js/build",
-  ENTRY_POINT: glob.sync('src/*.jsx')
+  DEST_BUILD: "../js",
+  ENTRY_POINT: glob.sync('./src/**/*.jsx')
 };
 
 var props_react = {

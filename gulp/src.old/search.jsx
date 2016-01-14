@@ -6,19 +6,19 @@ var ReactDOM = require("react-dom");
 var SearchForm = React.createClass({
   PropTypes: {
     distances: React.PropTypes.array,
+    units: React.PropTypes.string,
+    onSubmit: React.PropTypes.func
   },
-  getDefaultProps: function() {
-    return {
-      distances: [2, 5, 10, 20, 30, 40, 50, 100],
-      units: "km"
-    };
-  },
+  // getDefaultProps: function() {
+  //   return {
+  //     distances: [2, 5, 10, 20, 30, 40, 50, 100],
+  //     // units: "km",
+  //     onSubmit: this._handleSubmit,
+  //   };
+  // },
   getInitialState: function() {
     return {
-      query: '',
-      within: 20,
-      rpp: 20,
-      zoom: 10
+      task: "todo",
     };
   },
   _handleQueryChange: function(e) {
@@ -50,6 +50,7 @@ var SearchForm = React.createClass({
     });
   },
   render: function() {
+    console.log(this.props);
     var selectOptions = this.props.distances.map(function(distance) {
       return <option className="geo" key={distance} value={distance}>&nbsp;&nbsp;&nbsp;{distance}&nbsp;</option>;
     });
@@ -76,6 +77,13 @@ var SearchForm = React.createClass({
 var SearchBox = React.createClass({
   PropTypes: {
     requestUrl: React.PropTypes.string.isRequired
+  },
+  getDefaultProps: function() {
+    return {
+      distances: [2, 5, 10, 20, 30, 40, 50, 100],
+      units: "km",
+      // onSubmit: this._handleSubmit,
+    };
   },
   _loadTweetsFromServer: function() {
   },

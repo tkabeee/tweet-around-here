@@ -96,7 +96,7 @@ var MapBox = React.createClass({
       self._updateMarkerAddress("Address 取得中…");
     });
     google.maps.event.addListener(self.gm.marker, 'drag', function() {
-      self._updateMarkerPosition("取得中…","取得中…");
+      self._updateMarkerPosition("…","…");
       self._updateZoomLevel();
     });
     google.maps.event.addListener(self.gm.marker, 'dragend', function() {
