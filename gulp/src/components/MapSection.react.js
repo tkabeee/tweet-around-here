@@ -10,10 +10,10 @@ var MapSection = React.createClass({
       <div id="mapSection">
         <MapCanvas />
         <div id="positionInfo">
-          <p class="latlng">Lat：<span id="lat"></span>&nbsp;&nbsp;&nbsp;Lng：<span id="lng"></span></p>
-          <p class="address"><span id="address">Address 取得中…</span></p>
+          <p className="latlng">Lat：<span id="lat"></span>&nbsp;&nbsp;&nbsp;Lng：<span id="lng"></span></p>
+          <p className="address"><span id="address">Address 取得中…</span></p>
         </div>
-        <div class="link">develop by <a href="//github.com/tkabeee" target="_blank">tkabee</a>. ＠<a href="//twitter.com/TweetAroundHere" target="_blank">TweetAroundHere</a></div>
+        <div className="link">develop by <a href="//github.com/tkabeee" target="_blank">tkabee</a>. ＠<a href="//twitter.com/TweetAroundHere" target="_blank">TweetAroundHere</a></div>
       </div>
     );
   }

@@ -1,61 +1,72 @@
 var React = require("react");
-var ReactPropsTypes = React.PropTypes;
-
-var AppStore = require("../stores/AppStore");
-
-function getStateFromStores() {
-}
 
 var SearchForm = React.createClass({
 
   PropTypes: {
-    distances: ReactPropsTypes.array,
-    units: ReactPropsTypes.string,
-    onSubmit: ReactPropsTypes.func
-  },
-
-  getDefaultProps: function() {
-    return {
-      distances: [2, 5, 10, 20, 30, 40, 50, 100],
-      units: "km",
-      onSubmit: this._handleSubmit,
-    };
+    query: React.PropTypes.string,
+    lat: React.PropTypes.number.isRequired,
+    lng: React.PropTypes.number.isRequired,
+    rpp: React.PropTypes.number.isRequired,
+    zoom: React.PropTypes.number.isRequired,
+    distance: React.PropTypes.number.isRequired,
+    distances: React.PropTypes.array.isRequired,
+    // units: React.PropTypes.string,
+    onSearchSubmit: React.PropTypes.func.isRequired
   },
 
   getInitialState: function() {
-    return getStateFromStores();
+    return {
+      query: this.props.query,
+      lat: this.props.lat,
+      lng: this.props.lng,
+      rpp: this.props.rpp,
+      zoom: this.props.zoom,
+      distance: this.props.distance,
+      geocode: this._formatGeocode(this.props.lat,this.props.lng,this.props.distance,this.props.units)
+    };
+  },
+
+  _formatGeocode: function(lat,lng,distance,units) {
+    return lat + ',' + lng + ',' + distance + units;
+  },
+
+  _handleQueryChange: function(e) {
+    this.setState({query: e.target.value});
+  },
+
+  _handleGeocodeChange: function(e) {
+    this.setState({geocode: e.target.value});
   },
 
   _handleSubmit: function(e) {
     e.preventDefault();
     var query = this.state.query.trim();
-    var distance = this.state.distance;
+    var geocode = this.state.geocode;
     var rpp = this.state.rpp;
     var zoom = this.state.zoom;
-    if (!distance || !rpp || !zoom) {
+    if (!geocode || !rpp || !zoom) {
       return;
     }
-    // this.props.onSearchSubmit({
-    //   query: query,
-    //   distance: distance,
-    //   rpp: rpp,
-    //   zoom: zoom
-    // });
-    // this.setState({
-    //   query: query,
-    //   distance: distance,
-    //   rpp: rpp,
-    //   zoom: zoom
-    // });
+    this.props.onSearchSubmit({
+      query: query,
+      geocode: geocode,
+      rpp: rpp,
+      zoom: zoom
+    });
   },
 
   render: function() {
+    var self = this;
+    var selectOptions = this.props.distances.map(function(distance) {
+      var geocode = self._formatGeocode(self.state.lat, self.state.lng, distance, self.props.units);
+      return <option className="geo" key={distance} value={geocode}>&nbsp;&nbsp;&nbsp;{distance}&nbsp;</option>;
+    });
+    var queryPlaceholder = '例）あけおめ';
     return (
-
       <div id="searchForm" className="search">
         <form name="form" method="get" onSubmit={this._handleSubmit}>
           半径
-          <select id="geocode" name="geocode" value={this.state.distance} onChange={this._handleDistanceChange}>
+          <select id="geocode" name="geocode" value={this.state.geocode} onChange={this._handleGeocodeChange}>
             {selectOptions}
           </select>
           &nbsp;km&nbsp;圏内&nbsp;&nbsp;
@@ -68,10 +79,9 @@ var SearchForm = React.createClass({
           <button id="submit_post"> 検 索 </button>
         </form>
       </div>
-
     );
   }
 
 });
 
-module.exports = SearchBox;
+module.exports = SearchForm;

@@ -3,15 +3,22 @@
 var AppDispatcher = require("../dispatcher/AppDispatcher");
 var EventEmitter = require("events").EventEmitter;
 var AppConstants = require("../constants/AppConstants");
+var SearchConstants = require("../constants/SearchConstants");
 var assign = require("object-assign");
 
+var CHANGE_EVENT = 'change';
+
 var _state = {
-  query: AppConstants.INIT_QUERY,
-  lat: AppConstants.INIT_LAT,
-  lng: AppConstants.INIT_LNG,
-  within: AppConstants.INIT_WITHIN,
-  rpp: AppConstants.INIT_RPP,
-  zoom: AppConstants.INIT_ZOOM,
+  query: SearchConstants.INIT_QUERY,
+  lat: SearchConstants.INIT_LAT,
+  lng: SearchConstants.INIT_LNG,
+  within: SearchConstants.INIT_WITHIN,
+  rpp: SearchConstants.INIT_RPP,
+  zoom: SearchConstants.INIT_ZOOM,
+  distance: SearchConstants.INIT_DISTANCE,
+  requestUrl: SearchConstants.REQUEST_URL,
+  distances: SearchConstants.DISTANCES,
+  units: SearchConstants.UNITS
 };
 
 var AppStore = assign({}, EventEmitter.prototype, {
@@ -19,6 +26,14 @@ var AppStore = assign({}, EventEmitter.prototype, {
   getAll: function() {
     return _state;
   },
+
+  addChangeListener: function(callback) {
+    this.on(CHANGE_EVENT, callback);
+  },
+
+  removeChangeListener: function(callback) {
+    this.removeListener(CHANGE_EVENT, callback);
+  }
 
 });
 
