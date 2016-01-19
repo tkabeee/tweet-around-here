@@ -8,7 +8,7 @@ var SearchForm = React.createClass({
     lng: React.PropTypes.number.isRequired,
     rpp: React.PropTypes.number.isRequired,
     zoom: React.PropTypes.number.isRequired,
-    distance: React.PropTypes.number.isRequired,
+    within: React.PropTypes.number.isRequired,
     distances: React.PropTypes.array.isRequired,
     // units: React.PropTypes.string,
     formatGeocode: React.PropTypes.func.isRequired,
@@ -22,14 +22,10 @@ var SearchForm = React.createClass({
       lng: this.props.lng,
       rpp: this.props.rpp,
       zoom: this.props.zoom,
-      distance: this.props.distance,
-      geocode: this.props.formatGeocode(this.props.lat,this.props.lng,this.props.distance,this.props.units)
+      within: this.props.within,
+      geocode: this.props.formatGeocode(this.props.lat,this.props.lng,this.props.within,this.props.units)
     };
   },
-
-  // _formatGeocode: function(lat,lng,distance,units) {
-  //   return lat + ',' + lng + ',' + distance + units;
-  // },
 
   _handleQueryChange: function(e) {
     this.setState({query: e.target.value});

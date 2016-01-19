@@ -19,8 +19,6 @@ module.exports = {
   // ズーム値
   INIT_ZOOM: 10,
 
-  INIT_DISTANCE: 20,
-
   REQUEST_URL: 'http://twttr-rest.appspot.com/search',
 
   // 地図サークル距離範囲

@@ -20,7 +20,7 @@ var SearchSection = React.createClass({
   _loadTweetsFromServer: function() {
     var params = {
       query: this.state.query.trim(),
-      geocode: this._handleFormatGeocode(this.state.lat, this.state.lng, this.state.distance, this.state.units),
+      geocode: this._handleFormatGeocode(this.state.lat, this.state.lng, this.state.within, this.state.units),
       rpp: this.state.rpp,
       zoom: this.state.zoom
     };
@@ -28,8 +28,8 @@ var SearchSection = React.createClass({
     this._handleSearchSubmit(params);
   },
 
-  _handleFormatGeocode: function(lat,lng,distance,units) {
-    return lat + ',' + lng + ',' + distance + units;
+  _handleFormatGeocode: function(lat,lng,within,units) {
+    return lat + ',' + lng + ',' + within + units;
   },
 
   _handleSearchSubmit: function(params) {
@@ -48,12 +48,14 @@ var SearchSection = React.createClass({
       success: function(data) {
         // TODO: レスポンスデータを料理
         for(var i in data.statuses) {
-          console.log(data.statuses[i]);
+          // console.log(data.statuses[i]);
           // console.log('name: '+data.statuses[i].user.name);
           // console.log('screen_name: @'+data.statuses[i].user.screen_name);
           // console.log('created_at: '+data.statuses[i].created_at);
           // console.log('text: '+data.statuses[i].text);
         }
+
+        // TODO: レスポンスをツイート変数に代入する
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(self.state.requestUrl, status, err.toString());
@@ -71,7 +73,7 @@ var SearchSection = React.createClass({
           rpp={this.state.rpp}
           zoom={this.state.zoom}
           distances={this.state.distances}
-          distance={this.state.distance}
+          within={this.state.within}
           units={this.state.units}
           formatGeocode={this._handleFormatGeocode}
           onSearchSubmit={this._handleSearchSubmit}

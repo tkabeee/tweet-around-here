@@ -15,7 +15,7 @@ var _state = {
   within: SearchConstants.INIT_WITHIN,
   rpp: SearchConstants.INIT_RPP,
   zoom: SearchConstants.INIT_ZOOM,
-  distance: SearchConstants.INIT_DISTANCE,
+  // distance: SearchConstants.INIT_DISTANCE,
   requestUrl: SearchConstants.REQUEST_URL,
   distances: SearchConstants.DISTANCES,
   units: SearchConstants.UNITS
