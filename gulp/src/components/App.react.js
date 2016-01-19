@@ -7,9 +7,7 @@ var TweetsSection = require("./TweetListItem.react");
 var MapSection = require("./MapSection.react");
 
 function getStateFromStores() {
-  return {
-    searchStates: AppStore.getAll()
-  }
+  return AppStore.getAll();
 }
 
 var App = React.createClass({
@@ -35,14 +33,14 @@ var App = React.createClass({
       <div className="">
         <header>
           <h1><a href="//tkabeee.github.io/tweetaroundhere" target="_self">Tweet Around Here</a></h1>
-          <SearchSection searchStates={this.state.searchStates} />
+          <SearchSection states={this.state} />
         </header>
         <div id="container">
           <div id="leftSide">
             <TweetsSection />
           </div>
           <div id="mainContent">
-            <MapSection />
+            <MapSection states={this.state} />
           </div>
         </div>
       </div>

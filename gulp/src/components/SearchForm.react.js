@@ -31,6 +31,8 @@ var SearchForm = React.createClass({
     this.setState({query: e.target.value});
   },
 
+  // TODO: withinChangeイベントを作成
+
   _handleGeocodeChange: function(e) {
     this.setState({geocode: e.target.value});
   },

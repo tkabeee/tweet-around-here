@@ -5,10 +5,23 @@ var MapCanvas = require("./MapCanvas.react");
 
 var MapSection = React.createClass({
 
+  propTypes: {
+    states: React.PropTypes.object.isRequired
+  },
+
+  getInitialState: function() {
+    return this.props.states;
+  },
+
   render: function() {
     return (
       <div id="mapSection">
-        <MapCanvas />
+        <MapCanvas
+          lat={this.state.lat}
+          lng={this.state.lng}
+          zoom={this.state.zoom}
+          within={this.state.within}
+        />
         <div id="positionInfo">
           <p className="latlng">Lat：<span id="lat"></span>&nbsp;&nbsp;&nbsp;Lng：<span id="lng"></span></p>
           <p className="address"><span id="address">Address 取得中…</span></p>

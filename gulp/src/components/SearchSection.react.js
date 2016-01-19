@@ -6,11 +6,11 @@ var SearchForm = require("./SearchForm.react");
 var SearchSection = React.createClass({
 
   propTypes: {
-    searchStates: React.PropTypes.object.isRequired
+    states: React.PropTypes.object.isRequired
   },
 
   getInitialState: function() {
-    return this.props.searchStates;
+    return this.props.states;
   },
 
   componentDidMount: function() {

@@ -4,20 +4,19 @@ var React = require("react");
 
 var MapCanvas = React.createClass({
 
-  getDefaultProps: function() {
-    return {
-      units: "km"
-    };
+  PropTypes: {
+    lat: React.PropTypes.number.isRequired,
+    lng: React.PropTypes.number.isRequired,
+    zoom: React.PropTypes.number.isRequired,
+    within: React.PropTypes.number.isRequired,
   },
 
   getInitialState: function() {
     return {
-      query: "",
-      lat: 35.689488,
-      lng: 139.691706,
-      within: 20,
-      rpp: 20,
-      zoom: 10,
+      lat: this.props.lat,
+      lng: this.props.lng,
+      zoom: this.props.zoom,
+      within: this.props.within,
     };
   },
 
@@ -128,7 +127,9 @@ var MapCanvas = React.createClass({
 
   // ズームレベルを更新
   _updateZoomLevel: function() {
-    this.state.zoom = this.gm.map.getZoom();
+    this.setState({
+      zoom: this.gm.map.getZoom()
+    });
   },
 
   _createCircle: function() {
