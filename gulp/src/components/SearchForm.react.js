@@ -11,6 +11,7 @@ var SearchForm = React.createClass({
     distance: React.PropTypes.number.isRequired,
     distances: React.PropTypes.array.isRequired,
     // units: React.PropTypes.string,
+    formatGeocode: React.PropTypes.func.isRequired,
     onSearchSubmit: React.PropTypes.func.isRequired
   },
 
@@ -22,13 +23,13 @@ var SearchForm = React.createClass({
       rpp: this.props.rpp,
       zoom: this.props.zoom,
       distance: this.props.distance,
-      geocode: this._formatGeocode(this.props.lat,this.props.lng,this.props.distance,this.props.units)
+      geocode: this.props.formatGeocode(this.props.lat,this.props.lng,this.props.distance,this.props.units)
     };
   },
 
-  _formatGeocode: function(lat,lng,distance,units) {
-    return lat + ',' + lng + ',' + distance + units;
-  },
+  // _formatGeocode: function(lat,lng,distance,units) {
+  //   return lat + ',' + lng + ',' + distance + units;
+  // },
 
   _handleQueryChange: function(e) {
     this.setState({query: e.target.value});
@@ -58,7 +59,7 @@ var SearchForm = React.createClass({
   render: function() {
     var self = this;
     var selectOptions = this.props.distances.map(function(distance) {
-      var geocode = self._formatGeocode(self.state.lat, self.state.lng, distance, self.props.units);
+      var geocode = self.props.formatGeocode(self.state.lat, self.state.lng, distance, self.props.units);
       return <option className="geo" key={distance} value={geocode}>&nbsp;&nbsp;&nbsp;{distance}&nbsp;</option>;
     });
     var queryPlaceholder = '例）あけおめ';
