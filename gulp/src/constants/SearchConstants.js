@@ -10,7 +10,7 @@ module.exports = {
   // 経度
   INIT_LNG: '139.691706',
 
-  // 距離
+  // サークル距離
   INIT_WITHIN: 20,
 
   // 検索数
@@ -19,12 +19,13 @@ module.exports = {
   // ズーム値
   INIT_ZOOM: 10,
 
-  REQUEST_URL: 'http://twttr-rest.appspot.com/search',
-
-  // 地図サークル距離範囲
+  // サークル距離範囲
   DISTANCES: [2, 5, 10, 20, 30, 40, 50, 100],
 
   // twitter検索時の距離単位
   UNITS: 'km'
+
+  // twitter検索用API
+  REQUEST_URL: 'http://twttr-rest.appspot.com/search',
 
 };
