@@ -23,7 +23,7 @@ module.exports = {
   DISTANCES: [2, 5, 10, 20, 30, 40, 50, 100],
 
   // twitter検索時の距離単位
-  UNITS: 'km'
+  UNITS: 'km',
 
   // twitter検索用API
   REQUEST_URL: 'http://twttr-rest.appspot.com/search',
