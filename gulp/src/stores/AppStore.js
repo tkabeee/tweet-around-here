@@ -9,6 +9,7 @@ var assign = require("object-assign");
 var CHANGE_EVENT = 'change';
 
 var _state = {
+  // TODO: 初期値の定義はここでするのか？
   query: SearchConstants.INIT_QUERY,
   lat: SearchConstants.INIT_LAT,
   lng: SearchConstants.INIT_LNG,
@@ -20,10 +21,40 @@ var _state = {
   units: SearchConstants.UNITS
 };
 
+/**
+ * [explain...]
+ * @param {string} a
+ * @param {string} b
+ */
+function update(a, b) {
+  // TODO: 定義
+}
+
+function updateLatLng(lat, lng) {
+  _state.lat = lat;
+  _state.lng = lng;
+  console.log('updateLatLng: ' + lat + ',' + lng);
+}
+
+function updateDistance() {
+}
+
+function updateZoom(zoom) {
+  _state.zoom = zoom;
+  console.log('updateZoom: ' + zoom);
+}
+
+function updateTweets() {
+}
+
 var AppStore = assign({}, EventEmitter.prototype, {
 
   getAll: function() {
     return _state;
+  },
+
+  emitChange: function() {
+    this.emit(CHANGE_EVENT);
   },
 
   addChangeListener: function(callback) {
@@ -38,6 +69,28 @@ var AppStore = assign({}, EventEmitter.prototype, {
 
 // Register callback to handle all updates
 AppDispatcher.register(function(action) {
+
+  switch(action.actionType) {
+    case AppConstants.UPDATE_LAT_LNG:
+      updateLatLng(action.lat, action.lng);
+      AppStore.emitChange();
+      break;
+
+    case AppConstants.UPDATE_DISTANCE:
+      AppStore.emitChange();
+      break;
+
+    case AppConstants.UPDATE_ZOOM:
+      updateZoom(action.zoom);
+      AppStore.emitChange();
+      break;
+
+    case AppConstants.UPDATE_TWEETS:
+      AppStore.emitChange();
+      break;
+
+    default:
+  }
 
 });
 

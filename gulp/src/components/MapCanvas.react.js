@@ -1,6 +1,7 @@
 "use strict";
 
 var React = require("react");
+var AppActions = require("../actions/AppActions");
 
 var MapCanvas = React.createClass({
 
@@ -52,22 +53,8 @@ var MapCanvas = React.createClass({
     this._setDragEvent();
     this._createCircle();
 
-    google.maps.event.addListener(self.gm.map, 'click', function(e) {
-      self.state.lat = e.latLng.lat();
-      self.state.lng = e.latLng.lng();
-
-      self._setMarker();
-      self._updateMarkerPosition(self.state.lat, self.state.lng);
-      self._setGeocodePosition();
-      self._setDragEvent();
-      self._createCircle();
-      // TODO: 初期検索を実行
-      console.log('TODO:');
-    });
-
-    google.maps.event.addListener(self.gm.map, 'zoom_changed', function() {
-      self._updateZoomLevel();
-    });
+    this._handleMapClick();
+    this._handleMapZoomChanged();
   },
 
   _setMarker: function() {
@@ -97,27 +84,21 @@ var MapCanvas = React.createClass({
   },
 
   _setDragEvent: function() {
-    var self = this;
-    google.maps.event.addListener(self.gm.marker, 'dragstart', function() {
-      self._updateMarkerAddress("Address 取得中…");
-    });
-    google.maps.event.addListener(self.gm.marker, 'drag', function() {
-      self._updateMarkerPosition("…","…");
-      self._updateZoomLevel();
-    });
-    google.maps.event.addListener(self.gm.marker, 'dragend', function() {
-      self._updateMarkerPosition(self.state.lat, self.state.lng);
-      self._setGeocodePosition();
-      // TODO: マーカードラッグ後にtweet検索
-      console.log('TODO:');
-      // this.twsearch(Tws.query, Tws.lat, Tws.lng, Tws.within, Tws.units, Tws.rpp);
-    });
+    this._handleMarkerDragStart();
+    this._handleMarkerDrag();
+    this._handleMarkerDragEnd();
   },
 
   // マーカーのポジション更新
   _updateMarkerPosition: function(lat, lng) {
     document.getElementById("lat").textContent = lat;
     document.getElementById("lng").textContent = lng;
+  },
+
+  _updateLatLng: function(lat, lng) {
+    this.setState({lat: lat});
+    this.setState({lng: lng});
+    AppActions.updateLatLng(lat, lng);
   },
 
   // マーカーの住所を更新
@@ -127,9 +108,9 @@ var MapCanvas = React.createClass({
 
   // ズームレベルを更新
   _updateZoomLevel: function() {
-    this.setState({
-      zoom: this.gm.map.getZoom()
-    });
+    var zoom = this.gm.map.getZoom();
+    this.setState({zoom: zoom});
+    AppActions.updateZoom(zoom);
   },
 
   _createCircle: function() {
@@ -152,6 +133,57 @@ var MapCanvas = React.createClass({
 
   _deleteCircle: function() {
     this.gm.circle.setMap(null);
+  },
+
+  _handleMapClick: function() {
+    var self = this;
+    google.maps.event.addListener(self.gm.map, 'click', function(e) {
+      var lat = e.latLng.lat();
+      var lng = e.latLng.lng();
+
+      self._updateLatLng(lat, lng);
+      self._updateMarkerPosition(lat.toFixed(6), lng.toFixed(6));
+      self._setMarker();
+      self._setGeocodePosition();
+      self._setDragEvent();
+      self._createCircle();
+    });
+  },
+
+  _handleMapZoomChanged: function() {
+    var self = this;
+    google.maps.event.addListener(self.gm.map, 'zoom_changed', function() {
+      self._updateZoomLevel();
+    });
+  },
+
+  _handleMarkerDragStart: function() {
+    var self = this;
+    google.maps.event.addListener(self.gm.marker, 'dragstart', function() {
+      self._updateMarkerAddress("Address 取得中…");
+    });
+  },
+
+  _handleMarkerDrag: function() {
+    var self = this;
+    google.maps.event.addListener(self.gm.marker, 'drag', function() {
+      self._updateMarkerPosition("…","…");
+      self._updateZoomLevel();
+    });
+  },
+
+  _handleMarkerDragEnd: function() {
+    var self = this;
+    google.maps.event.addListener(self.gm.marker, 'dragend', function(e) {
+      var lat = e.latLng.lat();
+      var lng = e.latLng.lng();
+      self._updateLatLng(lat, lng);
+      self._updateMarkerPosition(lat.toFixed(6), lng.toFixed(6));
+      self._setGeocodePosition();
+
+      // TODO: マーカードラッグ後にtweet検索
+      // this.twsearch(Tws.query, Tws.lat, Tws.lng, Tws.within, Tws.units, Tws.rpp);
+    });
   },
 
   render: function() {
