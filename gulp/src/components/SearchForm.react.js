@@ -10,21 +10,22 @@ var SearchForm = React.createClass({
     zoom: React.PropTypes.number.isRequired,
     within: React.PropTypes.number.isRequired,
     distances: React.PropTypes.array.isRequired,
-    // units: React.PropTypes.string,
+    units: React.PropTypes.string,
     formatGeocode: React.PropTypes.func.isRequired,
     onSearchSubmit: React.PropTypes.func.isRequired
   },
 
-  getInitialState: function() {
-    return {
-      query: this.props.query,
-      lat: this.props.lat,
-      lng: this.props.lng,
-      rpp: this.props.rpp,
-      zoom: this.props.zoom,
-      within: this.props.within
-    };
-  },
+  // stateの初期化はAppに移譲、これらの値はpropsを使用する
+  // getInitialState: function() {
+  //   return {
+  //     query: this.props.query,
+  //     lat: this.props.lat,
+  //     lng: this.props.lng,
+  //     rpp: this.props.rpp,
+  //     zoom: this.props.zoom,
+  //     within: this.props.within
+  //   };
+  // },
 
   _handleQueryChange: function(e) {
     this.setState({query: e.target.value});
@@ -36,10 +37,10 @@ var SearchForm = React.createClass({
 
   _handleSubmit: function(e) {
     e.preventDefault();
-    var query = this.state.query.trim();
-    var geocode = this.props.formatGeocode(this.state.lat,this.state.lng,this.state.within,this.props.units);
-    var rpp = this.state.rpp;
-    var zoom = this.state.zoom;
+    var query = this.props.query.trim();
+    var geocode = this.props.formatGeocode(this.props.lat,this.props.lng,this.props.within,this.props.units);
+    var rpp = this.props.rpp;
+    var zoom = this.props.zoom;
     if (!geocode || !rpp || !zoom) {
       return;
     }
@@ -61,16 +62,16 @@ var SearchForm = React.createClass({
       <div id="searchForm" className="search">
         <form name="form" method="get" onSubmit={this._handleSubmit}>
           半径
-          <select id="within" name="within" value={this.state.within} onChange={this._handleWithinChange}>
+          <select id="within" name="within" value={this.props.within} onChange={this._handleWithinChange}>
             {selectOptions}
           </select>
           &nbsp;km&nbsp;圏内&nbsp;&nbsp;
           <span className="search-word">
-            <input type="text" id="query" name="q" value={this.state.query} placeholder={queryPlaceholder} onChange={this._handleQueryChange} style={{width: 230 + 'px'}} />
+            <input type="text" id="query" name="q" value={this.props.query} placeholder={queryPlaceholder} onChange={this._handleQueryChange} style={{width: 230 + 'px'}} />
           </span>
           &nbsp;
-          <input type="hidden" id="rpp" name="rpp" value={this.state.rpp} />
-          <input type="hidden" id="zoom" name="zoom" value={this.state.zoom} />
+          <input type="hidden" id="rpp" name="rpp" value={this.props.rpp} />
+          <input type="hidden" id="zoom" name="zoom" value={this.props.zoom} />
           <button id="submit_post"> 検 索 </button>
         </form>
       </div>

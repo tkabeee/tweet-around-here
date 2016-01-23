@@ -16,7 +16,7 @@ var App = React.createClass({
     return getStateFromStores();
   },
 
-  componetDidMount: function() {
+  componentDidMount: function() {
     AppStore.addChangeListener(this._onChange);
   },
 

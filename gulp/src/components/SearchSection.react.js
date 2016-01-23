@@ -9,20 +9,22 @@ var SearchSection = React.createClass({
     states: React.PropTypes.object.isRequired
   },
 
-  getInitialState: function() {
-    return this.props.states;
-  },
+  // ここでstateの初期化は必要ない、全てpropsから使用する
+  // getInitialState: function() {
+  //   return this.props.states;
+  // },
 
   componentDidMount: function() {
     this._loadTweetsFromServer();
   },
 
   _loadTweetsFromServer: function() {
+    var states = this.props.states;
     var params = {
-      query: this.state.query.trim(),
-      geocode: this._handleFormatGeocode(this.state.lat, this.state.lng, this.state.within, this.state.units),
-      rpp: this.state.rpp,
-      zoom: this.state.zoom
+      query: states.query.trim(),
+      geocode: this._handleFormatGeocode(states.lat, states.lng, states.within, states.units),
+      rpp: states.rpp,
+      zoom: states.zoom
     };
 
     this._handleSearchSubmit(params);
@@ -35,7 +37,7 @@ var SearchSection = React.createClass({
   _handleSearchSubmit: function(params) {
     var self = this;
     $.ajax({
-      url: this.state.requestUrl,
+      url: this.props.states.requestUrl,
       method: "POST",
       crossDomain: true,
       dataType: "json",
@@ -58,23 +60,24 @@ var SearchSection = React.createClass({
         // TODO: レスポンスをツイート変数に代入する
       }.bind(this),
       error: function(xhr, status, err) {
-        console.error(self.state.requestUrl, status, err.toString());
+        console.error(self.props.states.requestUrl, status, err.toString());
       }.bind(this)
     });
   },
 
   render: function() {
+    var states = this.props.states;
     return (
       <div id="searchSection">
         <SearchForm
-          query={this.state.query}
-          lat={this.state.lat}
-          lng={this.state.lng}
-          rpp={this.state.rpp}
-          zoom={this.state.zoom}
-          distances={this.state.distances}
-          within={this.state.within}
-          units={this.state.units}
+          query={states.query}
+          lat={states.lat}
+          lng={states.lng}
+          within={states.within}
+          rpp={states.rpp}
+          zoom={states.zoom}
+          distances={states.distances}
+          units={states.units}
           formatGeocode={this._handleFormatGeocode}
           onSearchSubmit={this._handleSearchSubmit}
         />

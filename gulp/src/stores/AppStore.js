@@ -33,7 +33,7 @@ function update(a, b) {
 function updateLatLng(lat, lng) {
   _state.lat = lat;
   _state.lng = lng;
-  console.log('updateLatLng: ' + lat + ',' + lng);
+  // console.log('updateLatLng: ' + lat + ',' + lng);
 }
 
 function updateDistance() {
@@ -41,7 +41,7 @@ function updateDistance() {
 
 function updateZoom(zoom) {
   _state.zoom = zoom;
-  console.log('updateZoom: ' + zoom);
+  // console.log('updateZoom: ' + zoom);
 }
 
 function updateTweets() {
