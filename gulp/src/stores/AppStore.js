@@ -21,32 +21,34 @@ var _state = {
   units: SearchConstants.UNITS
 };
 
-function update(a) {
-  _state.a = a;
+function update(key, val) {
+  _state[key] = val;
 }
 
 function updateQuery(query) {
-  update(query);
+  update('query', query);
   console.log('updateQuery: ' + query);
 }
 
 function updateLatLng(lat, lng) {
-  update(lat);
-  update(lng);
+  update('lat', parseFloat(lat));
+  update('lng', parseFloat(lng));
   console.log('updateLatLng: ' + lat + ',' + lng);
 }
 
-function updateDistance(within) {
-  update(within);
-  console.log('updateDistance: ' + within);
+function updateDistance(distance) {
+  update('within', parseInt(distance));
+  console.log('updateDistance: ' + distance);
 }
 
 function updateZoom(zoom) {
-  update(zoom);
+  update('zoom', parseInt(zoom));
   console.log('updateZoom: ' + zoom);
 }
 
-function updateTweets() {
+function updateTweets(tweet) {
+  update('tweet', tweet);
+  console.log('updateTweets: ' + tweet);
 }
 
 var AppStore = assign({}, EventEmitter.prototype, {
