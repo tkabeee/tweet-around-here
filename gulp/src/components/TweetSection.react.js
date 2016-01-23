@@ -1,17 +1,19 @@
 "use strict";
 
 var React = require("react");
+var TweetList = require("./TweetList.react");
 
-var TweetsSection = React.createClass({
+var TweetSection = React.createClass({
 
   render: function() {
     return (
       <div id="tweetsSection">
         <div id="tweets">
+          <TweetList tweetData={this.props.tweet} />
         </div>
       </div>
     );
   }
 });
 
-module.exports = TweetsSection;
+module.exports = TweetSection;

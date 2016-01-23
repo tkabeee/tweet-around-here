@@ -4,7 +4,7 @@ var React = require("react");
 var AppActions = require("../actions/AppActions");
 var AppStore = require("../stores/AppStore");
 var SearchSection = require("./SearchSection.react");
-var TweetsSection = require("./TweetListItem.react");
+var TweetSection = require("./TweetSection.react");
 var MapSection = require("./MapSection.react");
 
 function getStateFromStores() {
@@ -50,7 +50,6 @@ var App = React.createClass({
         //   console.log('created_at: '+data.statuses[i].created_at);
         //   console.log('text: '+data.statuses[i].text);
         // }
-        console.log(data);
         AppActions.updateTweet(data.statuses);
       }.bind(this),
       error: function(xhr, status, err) {
@@ -68,7 +67,7 @@ var App = React.createClass({
         </header>
         <div id="container">
           <div id="leftSide">
-            <TweetsSection />
+            <TweetSection tweet={this.state.tweet} />
           </div>
           <div id="mainContent">
             <MapSection states={this.state} onSearchTweet={this._handleSearchTweet} />
