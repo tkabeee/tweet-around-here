@@ -29,7 +29,6 @@ var App = React.createClass({
   },
 
   _handleSearchTweet: function(params) {
-    console.log(params);
     var self = this;
     $.ajax({
       url: this.state.requestUrl,

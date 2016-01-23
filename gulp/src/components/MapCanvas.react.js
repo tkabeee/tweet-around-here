@@ -12,25 +12,20 @@ var MapCanvas = React.createClass({
     within: React.PropTypes.number.isRequired,
   },
 
-  getInitialState: function() {
-    return {
-      lat: this.props.lat,
-      lng: this.props.lng,
-      zoom: this.props.zoom,
-      within: this.props.within,
-    };
-  },
-
   componentDidMount: function() {
     this._initMap();
+  },
+
+  componentDidUpdate: function() {
+    this._createCircle();
   },
 
   _initMap: function() {
     var self = this;
     this.gm = {};
     this.gm.map = new google.maps.Map(document.getElementById("mapCanvas"), {
-      zoom:              this.state.zoom,
-      center:            new google.maps.LatLng(this.state.lat, this.state.lng),
+      zoom:              this.props.zoom,
+      center:            new google.maps.LatLng(this.props.lat, this.props.lng),
       mapTypeControl:    false,
       mapTypeId:         google.maps.MapTypeId.ROADMAP,
       panControl:        false,
@@ -41,14 +36,14 @@ var MapCanvas = React.createClass({
 
     this.gm.marker = new google.maps.Marker({
       map: this.gm.map,
-      position: new google.maps.LatLng(this.state.lat, this.state.lng),
+      position: new google.maps.LatLng(this.props.lat, this.props.lng),
       draggable: true
     });
 
     this.gm.geocoder = new google.maps.Geocoder();
     this.gm.infoWindow = new google.maps.InfoWindow();
 
-    this._updateMarkerPosition(this.state.lat, this.state.lng);
+    this._updateMarkerPosition(this.props.lat, this.props.lng);
     this._setGeocodePosition();
     this._setDragEvent();
     this._createCircle();
@@ -61,7 +56,7 @@ var MapCanvas = React.createClass({
     this._deleteMarker();
     this.gm.marker = new google.maps.Marker({
       map: this.gm.map,
-      position: new google.maps.LatLng(this.state.lat, this.state.lng),
+      position: new google.maps.LatLng(this.props.lat, this.props.lng),
       draggable: true
     });
   },
@@ -96,8 +91,6 @@ var MapCanvas = React.createClass({
   },
 
   _updateLatLng: function(lat, lng) {
-    this.setState({lat: lat});
-    this.setState({lng: lng});
     AppActions.updateLatLng(lat, lng);
   },
 
@@ -109,7 +102,6 @@ var MapCanvas = React.createClass({
   // ズームレベルを更新
   _updateZoomLevel: function() {
     var zoom = this.gm.map.getZoom();
-    this.setState({zoom: zoom});
     AppActions.updateZoom(zoom);
   },
 
@@ -118,10 +110,10 @@ var MapCanvas = React.createClass({
       this._deleteCircle();
     }
     this.gm.circle = new google.maps.Circle({
-      center:        new google.maps.LatLng(this.state.lat, this.state.lng),
+      center:        new google.maps.LatLng(this.props.lat, this.props.lng),
       fillColor:     '#ff4500',
       fillOpacity:   0.2,
-      radius:        this.state.within*1000,
+      radius:        this.props.within*1000,
       strokeColor:   '#ff4500',
       strokeOpacity: 1,
       strokeWeight:  1

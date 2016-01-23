@@ -10,18 +10,15 @@ var MapSection = React.createClass({
     onSearchTweet: React.PropTypes.func.isRequired
   },
 
-  getInitialState: function() {
-    return this.props.states;
-  },
-
   render: function() {
+    var states = this.props.states;
     return (
       <div id="mapSection">
         <MapCanvas
-          lat={this.state.lat}
-          lng={this.state.lng}
-          zoom={this.state.zoom}
-          within={this.state.within}
+          lat={states.lat}
+          lng={states.lng}
+          zoom={states.zoom}
+          within={states.within}
         />
         <div id="positionInfo">
           <p className="latlng">Lat：<span id="lat"></span>&nbsp;&nbsp;&nbsp;Lng：<span id="lng"></span></p>

@@ -35,7 +35,6 @@ var SearchSection = React.createClass({
   },
 
   render: function() {
-    console.log(this.props.states);
     var states = this.props.states;
     return (
       <div id="searchSection">
