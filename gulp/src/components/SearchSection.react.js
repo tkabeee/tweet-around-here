@@ -9,11 +9,6 @@ var SearchSection = React.createClass({
     states: React.PropTypes.object.isRequired
   },
 
-  // ここでstateの初期化は必要ない、全てpropsから使用する
-  // getInitialState: function() {
-  //   return this.props.states;
-  // },
-
   componentDidMount: function() {
     this._loadTweetsFromServer();
   },
