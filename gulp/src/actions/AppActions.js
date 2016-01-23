@@ -5,6 +5,13 @@ var AppConstants = require("../constants/AppConstants");
 
 var AppActions = {
 
+  updateQuery: function(query) {
+    AppDispatcher.dispatch({
+      actionType: AppConstants.UPDATE_QUERY,
+      query: query
+    });
+  },
+
   updateLatLng: function(lat, lng) {
     AppDispatcher.dispatch({
       actionType: AppConstants.UPDATE_LAT_LNG,

@@ -21,27 +21,29 @@ var _state = {
   units: SearchConstants.UNITS
 };
 
-/**
- * [explain...]
- * @param {string} a
- * @param {string} b
- */
-function update(a, b) {
-  // TODO: 定義
+function update(a) {
+  _state.a = a;
+}
+
+function updateQuery(query) {
+  update(query);
+  console.log('updateQuery: ' + query);
 }
 
 function updateLatLng(lat, lng) {
-  _state.lat = lat;
-  _state.lng = lng;
-  // console.log('updateLatLng: ' + lat + ',' + lng);
+  update(lat);
+  update(lng);
+  console.log('updateLatLng: ' + lat + ',' + lng);
 }
 
-function updateDistance() {
+function updateDistance(within) {
+  update(within);
+  console.log('updateDistance: ' + within);
 }
 
 function updateZoom(zoom) {
-  _state.zoom = zoom;
-  // console.log('updateZoom: ' + zoom);
+  update(zoom);
+  console.log('updateZoom: ' + zoom);
 }
 
 function updateTweets() {
@@ -71,12 +73,18 @@ var AppStore = assign({}, EventEmitter.prototype, {
 AppDispatcher.register(function(action) {
 
   switch(action.actionType) {
+    case AppConstants.UPDATE_QUERY:
+      updateLatLng(action.query);
+      AppStore.emitChange();
+      break;
+
     case AppConstants.UPDATE_LAT_LNG:
       updateLatLng(action.lat, action.lng);
       AppStore.emitChange();
       break;
 
     case AppConstants.UPDATE_DISTANCE:
+      updateDistance(action.distance);
       AppStore.emitChange();
       break;
 
