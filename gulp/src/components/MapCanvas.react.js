@@ -168,7 +168,6 @@ var MapCanvas = React.createClass({
     var self = this;
     google.maps.event.addListener(self.gm.marker, 'drag', function() {
       self._updateMarkerPosition("…","…");
-      self._updateZoomLevel();
     });
   },
 

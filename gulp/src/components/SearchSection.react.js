@@ -6,7 +6,8 @@ var SearchForm = require("./SearchForm.react");
 var SearchSection = React.createClass({
 
   propTypes: {
-    states: React.PropTypes.object.isRequired
+    states: React.PropTypes.object.isRequired,
+    onSearchTweet: React.PropTypes.func.isRequired
   },
 
   componentDidMount: function() {
@@ -30,37 +31,11 @@ var SearchSection = React.createClass({
   },
 
   _handleSearchSubmit: function(params) {
-    var self = this;
-    $.ajax({
-      url: this.props.states.requestUrl,
-      method: "POST",
-      crossDomain: true,
-      dataType: "json",
-      cache: false,
-      data: {
-        q: decodeURI(params.query),
-        geocode: params.geocode
-      },
-      // context: document.body,
-      success: function(data) {
-        // TODO: レスポンスデータを料理
-        for(var i in data.statuses) {
-          // console.log(data.statuses[i]);
-          // console.log('name: '+data.statuses[i].user.name);
-          // console.log('screen_name: @'+data.statuses[i].user.screen_name);
-          // console.log('created_at: '+data.statuses[i].created_at);
-          // console.log('text: '+data.statuses[i].text);
-        }
-
-        // TODO: レスポンスをツイート変数に代入する
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(self.props.states.requestUrl, status, err.toString());
-      }.bind(this)
-    });
+    this.props.onSearchTweet(params);
   },
 
   render: function() {
+    console.log(this.props.states);
     var states = this.props.states;
     return (
       <div id="searchSection">

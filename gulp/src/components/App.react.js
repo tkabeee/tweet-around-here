@@ -28,19 +28,50 @@ var App = React.createClass({
     this.setState(getStateFromStores());
   },
 
+  _handleSearchTweet: function(params) {
+    console.log(params);
+    var self = this;
+    $.ajax({
+      url: this.state.requestUrl,
+      method: "POST",
+      crossDomain: true,
+      dataType: "json",
+      cache: false,
+      data: {
+        q: decodeURI(params.query),
+        geocode: params.geocode
+      },
+      // context: document.body,
+      success: function(data) {
+        for(var i in data.statuses) {
+          // console.log(data.statuses[i]);
+          // console.log('name: '+data.statuses[i].user.name);
+          // console.log('screen_name: @'+data.statuses[i].user.screen_name);
+          // console.log('created_at: '+data.statuses[i].created_at);
+          // console.log('text: '+data.statuses[i].text);
+        }
+
+        // TODO: レスポンスをツイート変数に代入する
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(self.states.requestUrl, status, err.toString());
+      }.bind(this)
+    });
+  },
+
   render: function() {
     return (
       <div className="">
         <header>
           <h1><a href="//tkabeee.github.io/tweetaroundhere" target="_self">Tweet Around Here</a></h1>
-          <SearchSection states={this.state} />
+          <SearchSection states={this.state} onSearchTweet={this._handleSearchTweet} />
         </header>
         <div id="container">
           <div id="leftSide">
             <TweetsSection />
           </div>
           <div id="mainContent">
-            <MapSection states={this.state} />
+            <MapSection states={this.state} onSearchTweet={this._handleSearchTweet} />
           </div>
         </div>
       </div>

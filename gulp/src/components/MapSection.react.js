@@ -6,7 +6,8 @@ var MapCanvas = require("./MapCanvas.react");
 var MapSection = React.createClass({
 
   propTypes: {
-    states: React.PropTypes.object.isRequired
+    states: React.PropTypes.object.isRequired,
+    onSearchTweet: React.PropTypes.func.isRequired
   },
 
   getInitialState: function() {
