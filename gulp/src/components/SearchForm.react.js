@@ -1,4 +1,5 @@
 var React = require("react");
+var AppActions = require("../actions/AppActions");
 
 var SearchForm = React.createClass({
 
@@ -28,11 +29,13 @@ var SearchForm = React.createClass({
   // },
 
   _handleQueryChange: function(e) {
-    this.setState({query: e.target.value});
+    // this.setState({query: e.target.value});
+    AppActions.updateQuery(e.target.value);
   },
 
   _handleWithinChange: function(e) {
-    this.setState({within: e.target.value});
+    // this.setState({within: e.target.value});
+    AppActions.updateDistance(e.target.value);
   },
 
   _handleSubmit: function(e) {
@@ -62,7 +65,7 @@ var SearchForm = React.createClass({
       <div id="searchForm" className="search">
         <form name="form" method="get" onSubmit={this._handleSubmit}>
           半径
-          <select id="within" name="within" value={this.props.within} onChange={this._handleWithinChange}>
+          <select id="within" name="within" defaultValue={this.props.within} onChange={this._handleWithinChange}>
             {selectOptions}
           </select>
           &nbsp;km&nbsp;圏内&nbsp;&nbsp;
