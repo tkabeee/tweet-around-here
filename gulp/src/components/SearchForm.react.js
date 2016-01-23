@@ -16,18 +16,6 @@ var SearchForm = React.createClass({
     onSearchSubmit: React.PropTypes.func.isRequired
   },
 
-  // stateの初期化はAppに移譲、これらの値はpropsを使用する
-  // getInitialState: function() {
-  //   return {
-  //     query: this.props.query,
-  //     lat: this.props.lat,
-  //     lng: this.props.lng,
-  //     rpp: this.props.rpp,
-  //     zoom: this.props.zoom,
-  //     within: this.props.within
-  //   };
-  // },
-
   _handleQueryChange: function(e) {
     // this.setState({query: e.target.value});
     AppActions.updateQuery(e.target.value);
