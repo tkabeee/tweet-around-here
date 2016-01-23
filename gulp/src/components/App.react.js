@@ -1,6 +1,7 @@
 "use strict";
 
 var React = require("react");
+var AppActions = require("../actions/AppActions");
 var AppStore = require("../stores/AppStore");
 var SearchSection = require("./SearchSection.react");
 var TweetsSection = require("./TweetListItem.react");
@@ -42,15 +43,15 @@ var App = React.createClass({
       },
       // context: document.body,
       success: function(data) {
-        for(var i in data.statuses) {
-          // console.log(data.statuses[i]);
-          // console.log('name: '+data.statuses[i].user.name);
-          // console.log('screen_name: @'+data.statuses[i].user.screen_name);
-          // console.log('created_at: '+data.statuses[i].created_at);
-          // console.log('text: '+data.statuses[i].text);
-        }
-
-        // TODO: レスポンスをツイート変数に代入する
+        // for(var i in data.statuses) {
+        //   console.log(data.statuses[i]);
+        //   console.log('name: '+data.statuses[i].user.name);
+        //   console.log('screen_name: @'+data.statuses[i].user.screen_name);
+        //   console.log('created_at: '+data.statuses[i].created_at);
+        //   console.log('text: '+data.statuses[i].text);
+        // }
+        console.log(data);
+        AppActions.updateTweet(data.statuses);
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(self.states.requestUrl, status, err.toString());

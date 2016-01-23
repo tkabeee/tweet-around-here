@@ -34,10 +34,10 @@ var AppActions = {
     });
   },
 
-  updateTweets: function(data) {
+  updateTweet: function(data) {
     AppDispatcher.dispatch({
-      actionType: AppConstants.UPDATE_TWEETS,
-      data: data
+      actionType: AppConstants.UPDATE_TWEET,
+      tweet: data
     });
   }
 

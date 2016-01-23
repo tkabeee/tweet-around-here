@@ -18,7 +18,7 @@ var _state = {
   zoom: SearchConstants.INIT_ZOOM,
   requestUrl: SearchConstants.REQUEST_URL,
   distances: SearchConstants.DISTANCES,
-  units: SearchConstants.UNITS
+  units: SearchConstants.UNITS,
 };
 
 function update(key, val) {
@@ -46,9 +46,9 @@ function updateZoom(zoom) {
   console.log('updateZoom: ' + zoom);
 }
 
-function updateTweets(tweet) {
+function updateTweet(tweet) {
   update('tweet', tweet);
-  console.log('updateTweets: ' + tweet);
+  console.log('updateTweet: ' + tweet);
 }
 
 var AppStore = assign({}, EventEmitter.prototype, {
@@ -76,7 +76,7 @@ AppDispatcher.register(function(action) {
 
   switch(action.actionType) {
     case AppConstants.UPDATE_QUERY:
-      updateLatLng(action.query);
+      updateQuery(action.query);
       AppStore.emitChange();
       break;
 
@@ -95,7 +95,8 @@ AppDispatcher.register(function(action) {
       AppStore.emitChange();
       break;
 
-    case AppConstants.UPDATE_TWEETS:
+    case AppConstants.UPDATE_TWEET:
+      updateTweet(action.tweet);
       AppStore.emitChange();
       break;
 
