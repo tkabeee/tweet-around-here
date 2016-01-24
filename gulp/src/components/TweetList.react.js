@@ -4,7 +4,6 @@ var TweetList = React.createClass({
 
   render: function() {
     var tweetListItems = this.props.tweetData.map(function(data) {
-      console.log(data);
       var baseHref = "//twitter.com/";
       return (
         <li className="stream-list-item">

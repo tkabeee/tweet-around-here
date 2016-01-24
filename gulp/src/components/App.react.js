@@ -29,8 +29,13 @@ var App = React.createClass({
     this.setState(getStateFromStores());
   },
 
-  _handleSearchTweet: function(params) {
+  _handleSearchTweet: function() {
     var self = this;
+    var params = {
+      query: this.state.query.trim(),
+      geocode: this.state.lat + ',' + this.state.lng + ',' + this.state.within + this.state.units,
+      rpp: this.state.rpp
+    };
     $.ajax({
       url: this.state.requestUrl,
       method: "POST",
@@ -39,7 +44,8 @@ var App = React.createClass({
       cache: false,
       data: {
         q: decodeURI(params.query),
-        geocode: params.geocode
+        geocode: params.geocode,
+        count: params.rpp
       },
       // context: document.body,
       success: function(data) {

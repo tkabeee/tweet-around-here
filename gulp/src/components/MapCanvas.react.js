@@ -90,7 +90,8 @@ var MapCanvas = React.createClass({
     document.getElementById("lng").textContent = lng;
   },
 
-  _updateLatLng: function(lat, lng) {
+  // 経度・緯度の更新
+  _updateStateLatLng: function(lat, lng) {
     AppActions.updateLatLng(lat, lng);
   },
 
@@ -100,7 +101,7 @@ var MapCanvas = React.createClass({
   },
 
   // ズームレベルを更新
-  _updateZoomLevel: function() {
+  _updateStateZoomLevel: function() {
     var zoom = this.gm.map.getZoom();
     AppActions.updateZoom(zoom);
   },
@@ -133,19 +134,21 @@ var MapCanvas = React.createClass({
       var lat = e.latLng.lat();
       var lng = e.latLng.lng();
 
-      self._updateLatLng(lat, lng);
+      self._updateStateLatLng(lat, lng);
       self._updateMarkerPosition(lat.toFixed(6), lng.toFixed(6));
       self._setMarker();
       self._setGeocodePosition();
       self._setDragEvent();
       self._createCircle();
+
+      self.props.onSearchTweet();
     });
   },
 
   _handleMapZoomChanged: function() {
     var self = this;
     google.maps.event.addListener(self.gm.map, 'zoom_changed', function() {
-      self._updateZoomLevel();
+      self._updateStateZoomLevel();
     });
   },
 
@@ -168,12 +171,11 @@ var MapCanvas = React.createClass({
     google.maps.event.addListener(self.gm.marker, 'dragend', function(e) {
       var lat = e.latLng.lat();
       var lng = e.latLng.lng();
-      self._updateLatLng(lat, lng);
+      self._updateStateLatLng(lat, lng);
       self._updateMarkerPosition(lat.toFixed(6), lng.toFixed(6));
       self._setGeocodePosition();
 
-      // TODO: マーカードラッグ後にtweet検索
-      // this.twsearch(Tws.query, Tws.lat, Tws.lng, Tws.within, Tws.units, Tws.rpp);
+      self.props.onSearchTweet();
     });
   },
 

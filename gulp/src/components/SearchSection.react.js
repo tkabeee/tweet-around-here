@@ -15,23 +15,11 @@ var SearchSection = React.createClass({
   },
 
   _loadTweetsFromServer: function() {
-    var states = this.props.states;
-    var params = {
-      query: states.query.trim(),
-      geocode: this._handleFormatGeocode(states.lat, states.lng, states.within, states.units),
-      rpp: states.rpp,
-      zoom: states.zoom
-    };
-
-    this._handleSearchSubmit(params);
+    this.props.onSearchTweet();
   },
 
-  _handleFormatGeocode: function(lat,lng,within,units) {
-    return lat + ',' + lng + ',' + within + units;
-  },
-
-  _handleSearchSubmit: function(params) {
-    this.props.onSearchTweet(params);
+  _handleFormSubmit: function() {
+    this.props.onSearchTweet();
   },
 
   render: function() {
@@ -48,7 +36,7 @@ var SearchSection = React.createClass({
           distances={states.distances}
           units={states.units}
           formatGeocode={this._handleFormatGeocode}
-          onSearchSubmit={this._handleSearchSubmit}
+          onFormSubmit={this._handleFormSubmit}
         />
       </div>
     );

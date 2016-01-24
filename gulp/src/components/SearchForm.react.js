@@ -24,23 +24,12 @@ var SearchForm = React.createClass({
   _handleWithinChange: function(e) {
     // this.setState({within: e.target.value});
     AppActions.updateDistance(e.target.value);
+    this.props.onFormSubmit();
   },
 
   _handleSubmit: function(e) {
     e.preventDefault();
-    var query = this.props.query.trim();
-    var geocode = this.props.formatGeocode(this.props.lat,this.props.lng,this.props.within,this.props.units);
-    var rpp = this.props.rpp;
-    var zoom = this.props.zoom;
-    if (!geocode || !rpp || !zoom) {
-      return;
-    }
-    this.props.onSearchSubmit({
-      query: query,
-      geocode: geocode,
-      rpp: rpp,
-      zoom: zoom
-    });
+    this.props.onFormSubmit();
   },
 
   render: function() {

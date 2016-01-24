@@ -10,6 +10,10 @@ var MapSection = React.createClass({
     onSearchTweet: React.PropTypes.func.isRequired
   },
 
+  _handleSearchTweet: function() {
+    this.props.onSearchTweet();
+  },
+
   render: function() {
     var states = this.props.states;
     return (
@@ -19,6 +23,7 @@ var MapSection = React.createClass({
           lng={states.lng}
           zoom={states.zoom}
           within={states.within}
+          onSearchTweet={this._handleSearchTweet}
         />
         <div id="positionInfo">
           <p className="latlng">Lat：<span id="lat"></span>&nbsp;&nbsp;&nbsp;Lng：<span id="lng"></span></p>
