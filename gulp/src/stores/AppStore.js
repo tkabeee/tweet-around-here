@@ -48,7 +48,6 @@ function updateZoom(zoom) {
 }
 
 function updateTweet(tweet) {
-  console.log(tweet);
   update('tweet', tweet);
   // console.log('updateTweet: ' + tweet);
 }
