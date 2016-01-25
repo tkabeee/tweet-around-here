@@ -35,36 +35,43 @@ gulp.task("compass", function(){
     ;
 });
 
-var path_react = {
-  OUT: "build.js",
-  DEST_BUILD: "../js/build",
-  ENTRY_POINT: glob.sync('src/*.jsx')
+var PATH_REACT = {
+  out: "build.js",
+  dest_build: "../js",
+  entry_point: glob.sync('./src/**/*.js')
 };
 
-var props_react = {
-  entries: path_react.ENTRY_POINT,
+var PROPS_REACT = {
+  entries: PATH_REACT.entry_point,
   transform: [reactify],
-  debug: true,
+  debug: false,
   cache: {},
   packageCache: {},
-  fullPaths: true,
+  fullPaths: false,
 };
 
-var bundler = watchify(browserify(props_react));
+gulp.task("browserify", function() {
+  var b = browserify(PROPS_REACT);
+  jsCompiile(b);
+});
 
-bundler.on("update", jsxCompiile);
+gulp.task("watchify", function() {
+  var b = watchify(browserify(PROPS_REACT));
+  b.on("update", function() {
+    jsCompiile(b);
+  });
+  jsCompiile(b);
+});
 
-gulp.task("watchify", jsxCompiile);
-
-function jsxCompiile(){
-  return bundler.bundle()
+function jsCompiile(b) {
+  return b.bundle()
     .on("error", function(err){
       console.log(util.colors.red("Oops! you have ERROR! \n" + err.message));
       this.emit('end');
     })
-    .pipe(source(path_react.OUT))
-    .pipe(duration('compiled "' + path_react.OUT + '"'))
-    .pipe(gulp.dest(path_react.DEST_BUILD))
+    .pipe(source(PATH_REACT.out))
+    .pipe(duration('compiled "' + PATH_REACT.out + '"'))
+    .pipe(gulp.dest(PATH_REACT.dest_build))
     ;
 }
 
