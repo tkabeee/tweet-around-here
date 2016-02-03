@@ -16,6 +16,26 @@ var SearchForm = React.createClass({
     onSearchSubmit: React.PropTypes.func.isRequired
   },
 
+  getInitialState: function() {
+    return {
+      placeholder: "Twitterを検索"
+    };
+  },
+
+  _handleQueryFocus: function(e) {
+    if (e.target.classList.contains("focused")) {
+      return;
+    }
+    e.target.classList.add("focused");
+  },
+
+  _handleQueryBlur: function(e) {
+    if (e.target.classList.contains("focused")) {
+      e.target.classList.remove("focused");
+    }
+    // self.val(placeHolder).removeClass("focused");
+  },
+
   _handleQueryChange: function(e) {
     // this.setState({query: e.target.value});
     AppActions.updateQuery(e.target.value);
@@ -37,7 +57,7 @@ var SearchForm = React.createClass({
     var selectOptions = this.props.distances.map(function(distance) {
       return <option className="distance" key={distance} value={distance}>&nbsp;&nbsp;&nbsp;{distance}&nbsp;</option>;
     });
-    var queryPlaceholder = '例）あけおめ';
+    var queryPlaceholder = this.state.placeholder;
     return (
       <div id="searchForm" className="search">
         <form name="form" method="get" onSubmit={this._handleSubmit}>
@@ -47,7 +67,7 @@ var SearchForm = React.createClass({
           </select>
           &nbsp;km&nbsp;圏内&nbsp;&nbsp;
           <span className="search-word">
-            <input type="text" id="query" name="q" value={this.props.query} placeholder={queryPlaceholder} onChange={this._handleQueryChange} style={{width: 230 + 'px'}} />
+            <input type="text" id="query" name="q" value={this.props.query} placeholder={queryPlaceholder} onFocus={this._handleQueryFocus} onBlur={this._handleQueryBlur} onChange={this._handleQueryChange} style={{width: 230 + 'px'}} />
           </span>
           &nbsp;
           <input type="hidden" id="rpp" name="rpp" value={this.props.rpp} />
