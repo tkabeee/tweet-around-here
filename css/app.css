@@ -472,7 +472,6 @@ select {
 
 input[type="text"] {
   padding: 4px;
-  color: #cccccc;
   font-size: 120%;
   line-height: 120%;
 }
@@ -513,20 +512,18 @@ header .search {
   margin-top: 13px;
   margin-left: 60px;
 }
-header .search-word {
-  margin: 0 auto;
-  /*
-  padding: 6px 0;
-  padding-left: 22px;
-  width: 240px;
-  background-image: url(/img/icon_search.gif);
-  background-position: left;
-  background-repeat: no-repeat;
-  */
+header .search-distance {
+  display: inline-block;
+  float: left;
+  padding: 4px;
 }
-header .share {
-  float: right;
-  margin-top: 15px;
+header .search-word {
+  display: inline-block;
+  float: left;
+}
+header .search-submit {
+  display: inline-block;
+  padding: 4px;
 }
 
 /*---------------
@@ -740,15 +737,6 @@ button[type] {
 
 *:first-child + html .container button[type] {
   padding: 2px 10px 2px 10px;
-}
-
-button:hover,
-a.button:hover {
-  background-color: #DFDFDF;
-  border: 1px solid #CCCCCC;
-  border-right-color: #999999;
-  border-bottom-color: #999999;
-  color: #000000;
 }
 
 a.button:active,
