@@ -130,7 +130,9 @@ var App = React.createClass({displayName: "App",
     return (
       React.createElement("div", {className: ""}, 
         React.createElement("header", null, 
-          React.createElement("h1", null, React.createElement("a", {href: "//tkabeee.github.io/tweetaroundhere", target: "_self"}, "Tweet Around Here")), 
+          React.createElement("div", {className: "header-left"}, 
+            React.createElement("h1", null, React.createElement("a", {href: "//tkabeee.github.io/tweetaroundhere", target: "_self"}, "Tweet Around Here"))
+          ), 
           React.createElement(SearchSection, {states: this.state, onSearchTweet: this._handleSearchTweet})
         ), 
         React.createElement("div", {id: "container"}, 
@@ -360,7 +362,7 @@ var MapSection = React.createClass({displayName: "MapSection",
   render: function() {
     var states = this.props.states;
     return (
-      React.createElement("div", {id: "mapSection"}, 
+      React.createElement("div", {id: "mapSection", className: "map-section"}, 
         React.createElement(MapCanvas, {
           lat: states.lat, 
           lng: states.lng, 
@@ -399,6 +401,26 @@ var SearchForm = React.createClass({displayName: "SearchForm",
     onSearchSubmit: React.PropTypes.func.isRequired
   },
 
+  getInitialState: function() {
+    return {
+      placeholder: "tweetを検索"
+    };
+  },
+
+  _handleQueryFocus: function(e) {
+    if (e.target.classList.contains("focused")) {
+      return;
+    }
+    e.target.classList.add("focused");
+  },
+
+  _handleQueryBlur: function(e) {
+    if (e.target.classList.contains("focused")) {
+      e.target.classList.remove("focused");
+    }
+    // self.val(placeHolder).removeClass("focused");
+  },
+
   _handleQueryChange: function(e) {
     // this.setState({query: e.target.value});
     AppActions.updateQuery(e.target.value);
@@ -407,7 +429,7 @@ var SearchForm = React.createClass({displayName: "SearchForm",
   _handleWithinChange: function(e) {
     // this.setState({within: e.target.value});
     AppActions.updateDistance(e.target.value);
-    this.props.onFormSubmit();
+    // this.props.onFormSubmit();
   },
 
   _handleSubmit: function(e) {
@@ -420,22 +442,21 @@ var SearchForm = React.createClass({displayName: "SearchForm",
     var selectOptions = this.props.distances.map(function(distance) {
       return React.createElement("option", {className: "distance", key: distance, value: distance}, "   ", distance, " ");
     });
-    var queryPlaceholder = '例）あけおめ';
+    var queryPlaceholder = this.state.placeholder;
     return (
       React.createElement("div", {id: "searchForm", className: "search"}, 
         React.createElement("form", {name: "form", method: "get", onSubmit: this._handleSubmit}, 
-          "半径", 
-          React.createElement("select", {id: "within", name: "within", defaultValue: this.props.within, onChange: this._handleWithinChange}, 
-            selectOptions
+          React.createElement("span", {className: "search-distance"}, 
+            React.createElement("input", {id: "within", type: "range", name: "within", min: "2", max: "100", defaultValue: this.props.within, onChange: this._handleWithinChange})
           ), 
-          " km 圏内  ", 
           React.createElement("span", {className: "search-word"}, 
-            React.createElement("input", {type: "text", id: "query", name: "q", value: this.props.query, placeholder: queryPlaceholder, onChange: this._handleQueryChange, style: {width: 230 + 'px'}})
+            React.createElement("input", {type: "text", id: "query", name: "q", value: this.props.query, placeholder: queryPlaceholder, onFocus: this._handleQueryFocus, onBlur: this._handleQueryBlur, onChange: this._handleQueryChange, style: {width: 230 + 'px'}})
           ), 
-          " ", 
+          React.createElement("span", {className: "search-submit"}, 
+            React.createElement("button", {id: "submit_post"}, " 検 索 ")
+          ), 
           React.createElement("input", {type: "hidden", id: "rpp", name: "rpp", value: this.props.rpp}), 
-          React.createElement("input", {type: "hidden", id: "zoom", name: "zoom", value: this.props.zoom}), 
-          React.createElement("button", {id: "submit_post"}, " 検 索 ")
+          React.createElement("input", {type: "hidden", id: "zoom", name: "zoom", value: this.props.zoom})
         )
       )
     );
@@ -473,7 +494,7 @@ var SearchSection = React.createClass({displayName: "SearchSection",
   render: function() {
     var states = this.props.states;
     return (
-      React.createElement("div", {id: "searchSection"}, 
+      React.createElement("div", {id: "searchSection", className: "search-section"}, 
         React.createElement(SearchForm, {
           query: states.query, 
           lat: states.lat, 
@@ -585,7 +606,7 @@ var TweetSection = React.createClass({displayName: "TweetSection",
 
   render: function() {
     return (
-      React.createElement("div", {id: "tweetsSection"}, 
+      React.createElement("div", {id: "tweetsSection", className: "tweet-section"}, 
         React.createElement("div", {id: "tweets"}, 
           React.createElement(TweetList, {tweetData: this.props.tweet})
         )
