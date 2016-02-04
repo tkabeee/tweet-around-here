@@ -5,6 +5,12 @@
  ---------------*/
 
 header {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-flow: row;
+  flex-flow: row;
+  -webkit-align-items: center;
+  align-items: center;
   position: fixed;
   z-index: 1000;
   overflow: hidden;
@@ -13,31 +19,36 @@ header {
   background-color: #FFFFFF;
   border-bottom: 1px #DEE4EB solid;
 
-  h1 {
-    float: left;
-    margin-left: 30px;
+  .header-left {
+    -webkit-flex: 0 0 320px;
+    flex: 0 0 320px;
+    -webkit-order: 1;
+    order: 1;
+    width: 320px;
+    text-align: center;
   }
 
-  .search {
-    float: left;
-    margin-top: 13px;
-    margin-left: 60px;
+  .search-section {
+    -webkit-flex: 1 1 auto;
+    flex: 1 1 auto;
+    -webkit-order: 2;
+    order: 2;
   }
 
   .search-distance {
     display: inline-block;
-    float: left;
-    padding: 4px;
+    margin-left: 6px;
+    vertical-align: middle;
   }
 
   .search-word {
     display: inline-block;
-    float: left;
+    margin-left: 6px;
   }
 
   .search-submit {
     display: inline-block;
-    padding: 4px;
+    margin-left: 6px;
   }
 }
 
@@ -73,6 +84,9 @@ header {
   height: 100%;
   background: #F5F8FA;
   text-align: left;
+}
+
+.tweet-section {
 }
 
 .stream-list {
@@ -184,6 +198,9 @@ header {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
+}
+
+.map-section {
 }
 
 .latlng {

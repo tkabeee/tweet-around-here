@@ -7,7 +7,7 @@ var TweetSection = React.createClass({
 
   render: function() {
     return (
-      <div id="tweetsSection">
+      <div id="tweetsSection" className="tweet-section">
         <div id="tweets">
           <TweetList tweetData={this.props.tweet} />
         </div>

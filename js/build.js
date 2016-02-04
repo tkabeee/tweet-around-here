@@ -130,7 +130,9 @@ var App = React.createClass({displayName: "App",
     return (
       React.createElement("div", {className: ""}, 
         React.createElement("header", null, 
-          React.createElement("h1", null, React.createElement("a", {href: "//tkabeee.github.io/tweetaroundhere", target: "_self"}, "Tweet Around Here")), 
+          React.createElement("div", {className: "header-left"}, 
+            React.createElement("h1", null, React.createElement("a", {href: "//tkabeee.github.io/tweetaroundhere", target: "_self"}, "Tweet Around Here"))
+          ), 
           React.createElement(SearchSection, {states: this.state, onSearchTweet: this._handleSearchTweet})
         ), 
         React.createElement("div", {id: "container"}, 
@@ -360,7 +362,7 @@ var MapSection = React.createClass({displayName: "MapSection",
   render: function() {
     var states = this.props.states;
     return (
-      React.createElement("div", {id: "mapSection"}, 
+      React.createElement("div", {id: "mapSection", className: "map-section"}, 
         React.createElement(MapCanvas, {
           lat: states.lat, 
           lng: states.lng, 
@@ -492,7 +494,7 @@ var SearchSection = React.createClass({displayName: "SearchSection",
   render: function() {
     var states = this.props.states;
     return (
-      React.createElement("div", {id: "searchSection"}, 
+      React.createElement("div", {id: "searchSection", className: "search-section"}, 
         React.createElement(SearchForm, {
           query: states.query, 
           lat: states.lat, 
@@ -604,7 +606,7 @@ var TweetSection = React.createClass({displayName: "TweetSection",
 
   render: function() {
     return (
-      React.createElement("div", {id: "tweetsSection"}, 
+      React.createElement("div", {id: "tweetsSection", className: "tweet-section"}, 
         React.createElement("div", {id: "tweets"}, 
           React.createElement(TweetList, {tweetData: this.props.tweet})
         )
