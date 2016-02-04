@@ -17,7 +17,7 @@ var MapSection = React.createClass({
   render: function() {
     var states = this.props.states;
     return (
-      <div id="mapSection">
+      <div id="mapSection" className="map-section">
         <MapCanvas
           lat={states.lat}
           lng={states.lng}
