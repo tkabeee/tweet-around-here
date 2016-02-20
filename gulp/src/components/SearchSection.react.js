@@ -25,7 +25,7 @@ var SearchSection = React.createClass({
   render: function() {
     var states = this.props.states;
     return (
-      <div id="searchSection">
+      <div id="searchSection" className="search-section">
         <SearchForm
           query={states.query}
           lat={states.lat}
