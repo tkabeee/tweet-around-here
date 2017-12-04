@@ -59,7 +59,7 @@ var App = React.createClass({
         AppActions.updateTweet(data.statuses);
       }.bind(this),
       error: function(xhr, status, err) {
-        console.error(self.states.requestUrl, status, err.toString());
+        console.error(this.state.requestUrl, status, err.toString());
       }.bind(this)
     });
   },
