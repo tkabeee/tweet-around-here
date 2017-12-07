@@ -68,7 +68,7 @@ var App = React.createClass({
       <div className="">
         <header>
           <div className="header-left">
-            <h1><a href="//tkabeee.github.io/tweetaroundhere" target="_self">Tweet Around Here</a></h1>
+            <h1><a href="//tkabeee.github.io/tweet-around-here" target="_self">Tweet Around Here</a></h1>
           </div>
           <SearchSection states={this.state} onSearchTweet={this._handleSearchTweet} />
         </header>
