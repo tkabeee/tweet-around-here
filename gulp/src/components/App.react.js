@@ -39,7 +39,6 @@ var App = React.createClass({
     $.ajax({
       url: this.state.requestUrl,
       method: "POST",
-      crossDomain: true,
       dataType: "json",
       cache: false,
       data: {
@@ -59,7 +58,7 @@ var App = React.createClass({
         AppActions.updateTweet(data.statuses);
       }.bind(this),
       error: function(xhr, status, err) {
-        console.error(self.states.requestUrl, status, err.toString());
+        console.error(this.state.requestUrl, status, err.toString());
       }.bind(this)
     });
   },
@@ -69,7 +68,7 @@ var App = React.createClass({
       <div className="">
         <header>
           <div className="header-left">
-            <h1><a href="//tkabeee.github.io/tweetaroundhere" target="_self">Tweet Around Here</a></h1>
+            <h1><a href="//tkabeee.github.io/tweet-around-here" target="_self">Tweet Around Here</a></h1>
           </div>
           <SearchSection states={this.state} onSearchTweet={this._handleSearchTweet} />
         </header>
