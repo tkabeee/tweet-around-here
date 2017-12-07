@@ -39,7 +39,6 @@ var App = React.createClass({
     $.ajax({
       url: this.state.requestUrl,
       method: "POST",
-      crossDomain: true,
       dataType: "json",
       cache: false,
       data: {
