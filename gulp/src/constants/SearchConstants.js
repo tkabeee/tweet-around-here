@@ -26,6 +26,6 @@ module.exports = {
   UNITS: 'km',
 
   // twitter検索用API
-  REQUEST_URL: 'https://twttr-rest.appspot.com/search',
+  REQUEST_URL: 'https://twttr-rest.herokuapp.com/search.php',
 
 };
