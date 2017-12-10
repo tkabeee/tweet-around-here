@@ -25,14 +25,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/tkabeee/tweet-around-here.git"
-  },
+  "repository": "git+ssh://git@github.com/tkabeee/tweet-around-here.git",
   "author": "@tkabeee",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/tkabeee/tweet-around-here/issues"
   },
-  "homepage": "https://tkabeee.github.io/tweet-around-here/"
+  "homepage": "https://tkabeee.github.io/tweet-around-here/",
+  "private": null
 }
