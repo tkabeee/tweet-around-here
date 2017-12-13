@@ -5,10 +5,13 @@ var webserver = require('gulp-webserver');
 var plumber = require("gulp-plumber");
 var compass = require("gulp-compass");
 var autoprefixer = require("gulp-autoprefixer");
+var uglify = require('gulp-uglify');
+var rename = require('gulp-rename');
 
 var duration = require('gulp-duration');
 var util = require('gulp-util');
 var source = require('vinyl-source-stream');
+var buffer = require('vinyl-buffer');
 var browserify = require('browserify');
 var watchify = require('watchify');
 var reactify = require('reactify');
@@ -37,6 +40,7 @@ gulp.task("compass", function(){
 
 var PATH_REACT = {
   out: "build.js",
+  min: "build.min.js",
   dest_build: "../js",
   entry_point: glob.sync('./src/**/*.js')
 };
@@ -71,6 +75,12 @@ function jsCompiile(b) {
     })
     .pipe(source(PATH_REACT.out))
     .pipe(duration('compiled "' + PATH_REACT.out + '"'))
+    .pipe(buffer())
+    .pipe(uglify())
+    .pipe(rename({
+      extname: '.min.js'
+    }))
+    .pipe(duration('minified "' + PATH_REACT.min + '"'))
     .pipe(gulp.dest(PATH_REACT.dest_build))
     ;
 }
