@@ -22070,12 +22070,12 @@ var TweetList = React.createClass({displayName: "TweetList",
 
   render: function() {
     var self = this;
-    var tweetListItems = this.props.tweetData.map(function(data) {
+    var tweetListItems = this.props.tweetData.map(function(data, index) {
       var baseHref = "//twitter.com/";
       var timestamp = self._formatTimestamp(data.created_at);
       var tweet = self._replaceTweetLink(data.text);
       return (
-        React.createElement("li", {className: "stream-list-item"}, 
+        React.createElement("li", {key: index, className: "stream-list-item"}, 
           React.createElement("div", {className: "tweet"}, 
             React.createElement("div", {className: "content"}, 
               React.createElement("div", {className: "stream-item-header"}, 

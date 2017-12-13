@@ -42,12 +42,12 @@ var TweetList = React.createClass({
 
   render: function() {
     var self = this;
-    var tweetListItems = this.props.tweetData.map(function(data) {
+    var tweetListItems = this.props.tweetData.map(function(data, index) {
       var baseHref = "//twitter.com/";
       var timestamp = self._formatTimestamp(data.created_at);
       var tweet = self._replaceTweetLink(data.text);
       return (
-        <li className="stream-list-item">
+        <li key={index} className="stream-list-item">
           <div className="tweet">
             <div className="content">
               <div className="stream-item-header">
