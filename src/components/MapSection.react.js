@@ -1,10 +1,12 @@
 "use strict"
 
-var React = require("react");
-var MapCanvas = require("./MapCanvas.react");
+var React = require("react")
 import PropTypes from 'prop-types'
+import createReactClass from 'create-react-class'
 
-var MapSection = React.createClass({
+var MapCanvas = require("./MapCanvas.react");
+
+var MapSection = createReactClasss({
 
   propTypes: {
     states: PropTypes.object.isRequired,

@@ -1,9 +1,11 @@
-"use strict";
+"use strict"
 
-var React = require("react");
+var React = require("react")
+import createReactClass from 'create-react-class'
+
 var TweetList = require("./TweetList.react");
 
-var TweetSection = React.createClass({
+var TweetSection = createReactClass({
 
   render: function() {
     return (

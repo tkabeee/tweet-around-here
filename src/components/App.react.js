@@ -1,6 +1,8 @@
-"use strict";
+"use strict"
 
 var React = require("react");
+import createReactClass from 'create-react-class'
+
 var AppActions = require("../actions/AppActions");
 var AppStore = require("../stores/AppStore");
 var SearchSection = require("./SearchSection.react");
@@ -11,7 +13,7 @@ function getStateFromStores() {
   return AppStore.getAll();
 }
 
-var App = React.createClass({
+var App = createReactClass({
 
   getInitialState: function() {
     return getStateFromStores();

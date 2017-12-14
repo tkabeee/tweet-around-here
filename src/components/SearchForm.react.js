@@ -1,10 +1,12 @@
 "use strict"
 
-var React = require("react");
-var AppActions = require("../actions/AppActions");
+var React = require("react")
 import PropTypes from 'prop-types'
+import createReactClass from 'create-react-class'
 
-var SearchForm = React.createClass({
+var AppActions = require("../actions/AppActions");
+
+var SearchForm = createReactClass({
 
   PropTypes: {
     query: PropTypes.string,

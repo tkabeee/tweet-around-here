@@ -1,10 +1,12 @@
 "use strict"
 
-var React = require("react");
-var AppActions = require("../actions/AppActions");
+var React = require("react")
 import PropTypes from 'prop-types'
+import createReactClass from 'create-react-class'
 
-var MapCanvas = React.createClass({
+var AppActions = require("../actions/AppActions");
+
+var MapCanvas = createReactClass({
 
   PropTypes: {
     lat: PropTypes.number.isRequired,

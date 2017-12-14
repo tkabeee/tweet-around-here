@@ -1,10 +1,12 @@
 "use strict"
 
-var React = require("react");
-var SearchForm = require("./SearchForm.react");
+var React = require("react")
 import PropTypes from 'prop-types'
+import createReactClass from 'create-react-class'
 
-var SearchSection = React.createClass({
+var SearchForm = require("./SearchForm.react");
+
+var SearchSection = createReactClass({
 
   propTypes: {
     states: PropTypes.object.isRequired,

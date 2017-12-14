@@ -1,6 +1,9 @@
-var React = require("react");
+"use strict"
 
-var TweetList = React.createClass({
+var React = require("react")
+import createReactClass from 'create-react-class'
+
+var TweetList = createReactClass({
 
   _replaceTweetLink: function(txt) {
     return txt.replace(/((ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&amp;%@!&#45;\/]))?)/g,'<a href="$1">$1</a>')
