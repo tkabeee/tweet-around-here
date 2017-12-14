@@ -18,4 +18,4 @@ var TweetSection = createReactClass({
   }
 });
 
-module.exports = TweetSection;
+export default TweetSection

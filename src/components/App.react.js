@@ -88,4 +88,4 @@ var App = createReactClass({
 
 });
 
-module.exports = App;
+export default App

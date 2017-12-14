@@ -189,4 +189,4 @@ var MapCanvas = createReactClass({
   }
 });
 
-module.exports = MapCanvas;
+export default MapCanvas

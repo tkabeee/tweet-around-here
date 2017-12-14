@@ -79,4 +79,4 @@ var TweetList = createReactClass({
 
 });
 
-module.exports = TweetList;
+export default TweetList

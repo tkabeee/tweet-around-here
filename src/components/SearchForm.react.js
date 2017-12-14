@@ -84,4 +84,4 @@ var SearchForm = createReactClass({
 
 });
 
-module.exports = SearchForm;
+export default SearchForm

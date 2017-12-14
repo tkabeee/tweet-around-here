@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   // 各設定値を定義
 
   // 検索クエリ
@@ -28,4 +28,4 @@ module.exports = {
   // twitter検索用API
   REQUEST_URL: 'https://twttr-rest.herokuapp.com/search.php',
 
-};
+}

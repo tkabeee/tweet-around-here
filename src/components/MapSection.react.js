@@ -38,4 +38,4 @@ var MapSection = createReactClasss({
   }
 });
 
-module.exports = MapSection;
+export default MapSection

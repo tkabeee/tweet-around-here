@@ -47,4 +47,4 @@ var SearchSection = createReactClass({
 
 });
 
-module.exports = SearchSection;
+export default SearchSection

@@ -1,6 +1,6 @@
 var keyMirror = require("keymirror");
 
-module.exports = keyMirror({
+export default keyMirror({
 
   UPDATE_QUERY: null,
   UPDATE_LAT_LNG: null,
@@ -8,4 +8,4 @@ module.exports = keyMirror({
   UPDATE_ZOOM: null,
   UPDATE_TWEET: null,
 
-});
+})
