@@ -1,0 +1,26 @@
+{
+  "name": "tweet-around-here",
+  "version": "1.0.0",
+  "description": "",
+  "main": "build.js",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "webpack": "^3.10.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tkabeee/tweet-around-here.git"
+  },
+  "author": "tkabeee",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tkabeee/tweet-around-here/issues"
+  },
+  "homepage": "http://tkabeee.github.io/tweet-around-here/"
+}
