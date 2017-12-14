@@ -1,3 +1,5 @@
+const webpack = require('webpack')
+
 module.exports = {
   // entry point
   entry: [
@@ -9,6 +11,11 @@ module.exports = {
     path: `${__dirname}/build`,
     // dest file
     filename: 'bundle.js'
+  },
+  // http://localhost:8080/
+  devServer: {
+    contentBase: 'build',
+    port: 8080
   },
   module: {
     rules: [
@@ -38,5 +45,11 @@ module.exports = {
     extensions: [".js"]
   },
   // ソースマップを有効
-  devtool: 'source-map'
+  devtool: 'source-map',
+  plugins: [
+    // JS minify
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true
+    })
+  ]
 }
