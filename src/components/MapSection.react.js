@@ -1,13 +1,14 @@
-"use strict";
+"use strict"
 
 var React = require("react");
 var MapCanvas = require("./MapCanvas.react");
+import PropTypes from 'prop-types'
 
 var MapSection = React.createClass({
 
   propTypes: {
-    states: React.PropTypes.object.isRequired,
-    onSearchTweet: React.PropTypes.func.isRequired
+    states: PropTypes.object.isRequired,
+    onSearchTweet: PropTypes.func.isRequired
   },
 
   _handleSearchTweet: function() {

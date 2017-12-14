@@ -1,15 +1,16 @@
-"use strict";
+"use strict"
 
 var React = require("react");
 var AppActions = require("../actions/AppActions");
+import PropTypes from 'prop-types'
 
 var MapCanvas = React.createClass({
 
   PropTypes: {
-    lat: React.PropTypes.number.isRequired,
-    lng: React.PropTypes.number.isRequired,
-    zoom: React.PropTypes.number.isRequired,
-    within: React.PropTypes.number.isRequired,
+    lat: PropTypes.number.isRequired,
+    lng: PropTypes.number.isRequired,
+    zoom: PropTypes.number.isRequired,
+    within: PropTypes.number.isRequired,
   },
 
   componentDidMount: function() {

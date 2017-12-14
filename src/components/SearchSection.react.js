@@ -1,13 +1,14 @@
-"use strict";
+"use strict"
 
 var React = require("react");
 var SearchForm = require("./SearchForm.react");
+import PropTypes from 'prop-types'
 
 var SearchSection = React.createClass({
 
   propTypes: {
-    states: React.PropTypes.object.isRequired,
-    onSearchTweet: React.PropTypes.func.isRequired
+    states: PropTypes.object.isRequired,
+    onSearchTweet: PropTypes.func.isRequired
   },
 
   componentDidMount: function() {

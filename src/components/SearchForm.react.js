@@ -1,19 +1,22 @@
+"use strict"
+
 var React = require("react");
 var AppActions = require("../actions/AppActions");
+import PropTypes from 'prop-types'
 
 var SearchForm = React.createClass({
 
   PropTypes: {
-    query: React.PropTypes.string,
-    lat: React.PropTypes.number.isRequired,
-    lng: React.PropTypes.number.isRequired,
-    rpp: React.PropTypes.number.isRequired,
-    zoom: React.PropTypes.number.isRequired,
-    within: React.PropTypes.number.isRequired,
-    distances: React.PropTypes.array.isRequired,
-    units: React.PropTypes.string,
-    formatGeocode: React.PropTypes.func.isRequired,
-    onSearchSubmit: React.PropTypes.func.isRequired
+    query: PropTypes.string,
+    lat: PropTypes.number.isRequired,
+    lng: PropTypes.number.isRequired,
+    rpp: PropTypes.number.isRequired,
+    zoom: PropTypes.number.isRequired,
+    within: PropTypes.number.isRequired,
+    distances: PropTypes.array.isRequired,
+    units: PropTypes.string,
+    formatGeocode: PropTypes.func.isRequired,
+    onSearchSubmit: PropTypes.func.isRequired
   },
 
   getInitialState: function() {
