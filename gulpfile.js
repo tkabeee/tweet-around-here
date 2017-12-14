@@ -5,6 +5,10 @@ const webpackConfig = require('./webpack.config')
 const webpackStream = require('webpack-stream')
 const webpackDevServer = require('webpack-dev-server')
 
+const SCSS_FILES = 'sass/*.scss'
+const SASS_DIR = 'sass'
+const CSS_DIR = 'css'
+
 gulp.task('build', () => {
   return webpackStream(webpackConfig, webpack)
     .pipe(gulp.dest('build'))
