@@ -1,13 +1,14 @@
 "use strict"
 
-var React = require("react");
+import React from 'react';
+
 import createReactClass from 'create-react-class'
 
 var AppActions = require("../actions/AppActions");
 var AppStore = require("../stores/AppStore");
 var SearchSection = require("./SearchSection.react");
 var TweetSection = require("./TweetSection.react");
-var MapSection = require("./MapSection.react");
+import MapSection from './MapSection';
 
 function getStateFromStores() {
   return AppStore.getAll();
@@ -72,11 +73,11 @@ var App = createReactClass({
           <div className="header-left">
             <h1><a href="//tkabeee.github.io/tweet-around-here" target="_self">Tweet Around Here</a></h1>
           </div>
-          <SearchSection states={this.state} onSearchTweet={this._handleSearchTweet} />
+          {/* <SearchSection states={this.state} onSearchTweet={this._handleSearchTweet} /> */}
         </header>
         <div id="container">
           <div id="leftSide">
-            <TweetSection tweet={this.state.tweet} />
+            {/* <TweetSection tweet={this.state.tweet} /> */}
           </div>
           <div id="mainContent">
             <MapSection states={this.state} onSearchTweet={this._handleSearchTweet} />

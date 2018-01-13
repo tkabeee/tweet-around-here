@@ -4,7 +4,7 @@ var React = require("react")
 import PropTypes from 'prop-types'
 import createReactClass from 'create-react-class'
 
-var MapCanvas = require("./MapCanvas.react");
+import MapCanvas from './MapCanvas';
 
 var MapSection = createReactClasss({
 
