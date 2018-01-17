@@ -24,7 +24,6 @@ const MapCanvas = createReactClass({
   },
 
   _initMap: function() {
-    var self = this;
     this.gm = {};
     this.gm.map = new google.maps.Map(document.getElementById("mapCanvas"), {
       zoom:              this.props.zoom,
@@ -69,14 +68,13 @@ const MapCanvas = createReactClass({
   },
 
   _setGeocodePosition: function() {
-    var self = this;
-    self.gm.geocoder.geocode({
-      latLng: self.gm.marker.getPosition()
-    }, function(responses) {
+    this.gm.geocoder.geocode({
+      latLng: this.gm.marker.getPosition()
+    }, (responses) => {
       if (responses && responses.length > 0) {
-        self._updateMarkerAddress(responses[0].formatted_address);
+        this._updateMarkerAddress(responses[0].formatted_address);
       } else {
-        self._updateMarkerAddress("この場所の周辺情報を取得できませんでした。");
+        this._updateMarkerAddress("この場所の周辺情報を取得できませんでした。");
       }
     });
   },
@@ -132,53 +130,48 @@ const MapCanvas = createReactClass({
   },
 
   _handleMapClick: function() {
-    var self = this;
-    google.maps.event.addListener(self.gm.map, "click", function(e) {
+    google.maps.event.addListener(this.gm.map, "click", (e) => {
       var lat = e.latLng.lat();
       var lng = e.latLng.lng();
 
-      self._updateStateLatLng(lat, lng);
-      self._updateMarkerPosition(lat.toFixed(6), lng.toFixed(6));
-      self._setMarker();
-      self._setGeocodePosition();
-      self._setDragEvent();
-      self._createCircle();
+      this._updateStateLatLng(lat, lng);
+      this._updateMarkerPosition(lat.toFixed(6), lng.toFixed(6));
+      this._setMarker();
+      this._setGeocodePosition();
+      this._setDragEvent();
+      this._createCircle();
 
-      self.props.onSearchTweet();
+      this.props.onSearchTweet();
     });
   },
 
   _handleMapZoomChanged: function() {
-    var self = this;
-    google.maps.event.addListener(self.gm.map, "zoom_changed", function() {
-      self._updateStateZoomLevel();
+    google.maps.event.addListener(this.gm.map, "zoom_changed", () => {
+      this._updateStateZoomLevel();
     });
   },
 
   _handleMarkerDragStart: function() {
-    var self = this;
-    google.maps.event.addListener(self.gm.marker, "dragstart", function() {
-      self._updateMarkerAddress("Address 取得中…");
+    google.maps.event.addListener(this.gm.marker, "dragstart", () => {
+      this._updateMarkerAddress("Address 取得中…");
     });
   },
 
   _handleMarkerDrag: function() {
-    var self = this;
-    google.maps.event.addListener(self.gm.marker, "drag", function() {
-      self._updateMarkerPosition("…","…");
+    google.maps.event.addListener(this.gm.marker, "drag", () => {
+      this._updateMarkerPosition("…","…");
     });
   },
 
   _handleMarkerDragEnd: function() {
-    var self = this;
-    google.maps.event.addListener(self.gm.marker, "dragend", function(e) {
+    google.maps.event.addListener(this.gm.marker, "dragend", (e) => {
       var lat = e.latLng.lat();
       var lng = e.latLng.lng();
-      self._updateStateLatLng(lat, lng);
-      self._updateMarkerPosition(lat.toFixed(6), lng.toFixed(6));
-      self._setGeocodePosition();
+      this._updateStateLatLng(lat, lng);
+      this._updateMarkerPosition(lat.toFixed(6), lng.toFixed(6));
+      this._setGeocodePosition();
 
-      self.props.onSearchTweet();
+      this.props.onSearchTweet();
     });
   },
 
