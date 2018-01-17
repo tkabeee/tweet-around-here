@@ -5,9 +5,9 @@ import createReactClass from "create-react-class";
 
 import AppActions from "../actions/AppActions";
 import AppStore from "../stores/AppStore";
-var SearchSection = require("./SearchSection.react");
-var TweetSection = require("./TweetSection.react");
-import MapSection from './MapSection';
+import SearchSection from "./SearchSection.react";
+import TweetSection from "./TweetSection.react";
+import MapSection from "./MapSection";
 
 var App = createReactClass({
 
@@ -32,7 +32,7 @@ var App = createReactClass({
     var self = this;
     var params = {
       query: this.state.query.trim(),
-      geocode: this.state.lat + ',' + this.state.lng + ',' + this.state.within + this.state.units,
+      geocode: this.state.lat + "," + this.state.lng + "," + this.state.within + this.state.units,
       rpp: this.state.rpp
     };
     $.ajax({
@@ -49,10 +49,10 @@ var App = createReactClass({
       success: function(data) {
         // for(var i in data.statuses) {
         //   console.log(data.statuses[i]);
-        //   console.log('name: '+data.statuses[i].user.name);
-        //   console.log('screen_name: @'+data.statuses[i].user.screen_name);
-        //   console.log('created_at: '+data.statuses[i].created_at);
-        //   console.log('text: '+data.statuses[i].text);
+        //   console.log("name: "+data.statuses[i].user.name);
+        //   console.log("screen_name: @"+data.statuses[i].user.screen_name);
+        //   console.log("created_at: "+data.statuses[i].created_at);
+        //   console.log("text: "+data.statuses[i].text);
         // }
         AppActions.updateTweet(data.statuses);
       }.bind(this),
@@ -85,4 +85,4 @@ var App = createReactClass({
 
 });
 
-export default App
+export default App;
