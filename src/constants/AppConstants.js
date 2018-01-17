@@ -1,11 +1,9 @@
-var keyMirror = require("keymirror");
+"use strict";
 
-export default keyMirror({
-
-  UPDATE_QUERY: null,
-  UPDATE_LAT_LNG: null,
-  UPDATE_DISTANCE: null,
-  UPDATE_ZOOM: null,
-  UPDATE_TWEET: null,
-
-})
+const ActionTypes = {
+  UPDATE_QUERY: "UPDATE_QUERY",
+  UPDATE_LAT_LNG: "UPDATE_LAT_LNG",
+  UPDATE_DISTANCE: "UPDATE_DISTANCE",
+  UPDATE_ZOOM: "UPDATE_ZOOM",
+  UPDATE_TWEET: "UPDATE_TWEET",
+};
