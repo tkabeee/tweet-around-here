@@ -1,3 +1,5 @@
-import { Dispatcher } from 'flux'
+"use strict";
 
-export default new Dispatcher()
+import { Dispatcher } from "flux";
+
+export default new Dispatcher();
