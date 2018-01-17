@@ -3,15 +3,11 @@
 import React from "react";
 import createReactClass from "create-react-class";
 
-var AppActions = require("../actions/AppActions");
-var AppStore = require("../stores/AppStore");
+import AppActions from "../actions/AppActions";
+import AppStore from "../stores/AppStore";
 var SearchSection = require("./SearchSection.react");
 var TweetSection = require("./TweetSection.react");
 import MapSection from './MapSection';
-
-function getStateFromStores() {
-  return AppStore.getAll();
-}
 
 var App = createReactClass({
 
