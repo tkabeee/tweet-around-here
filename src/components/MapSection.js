@@ -6,7 +6,7 @@ import createReactClass from 'create-react-class'
 
 import MapCanvas from './MapCanvas';
 
-var MapSection = createReactClasss({
+var MapSection = createReactClass({
 
   propTypes: {
     states: PropTypes.object.isRequired,
