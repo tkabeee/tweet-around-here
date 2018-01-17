@@ -76,7 +76,7 @@ var AppStore = assign({}, EventEmitter.prototype, {
 // Register callback to handle all updates
 AppDispatcher.register(function(action) {
 
-  switch(action.actionType) {
+  switch(action.type) {
     case ActionTypes.UPDATE_QUERY:
       updateQuery(action.query);
       AppStore.emitChange();
