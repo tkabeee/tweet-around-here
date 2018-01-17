@@ -1,15 +1,16 @@
 "use strict";
 
-var AppDispatcher = require("../dispatcher/AppDispatcher");
-var EventEmitter = require("events").EventEmitter;
-var AppConstants = require("../constants/AppConstants");
-var SearchConstants = require("../constants/SearchConstants");
-var assign = require("object-assign");
+import { ReduceStore } from "flux/utils";
+import assign from "object-assign";
+import EventEmitter from "events";
 
-var CHANGE_EVENT = 'change';
+import { ActionTypes } from "../constants/AppConstants";
+import AppDispatcher from "../dispatcher/AppDispatcher";
+import SearchConstants from "../constants/SearchConstants";
+
+var CHANGE_EVENT = "change";
 
 var _state = {
-  // TODO: 初期値の定義はここでするのか？
   query: SearchConstants.INIT_QUERY,
   lat: SearchConstants.INIT_LAT,
   lng: SearchConstants.INIT_LNG,
@@ -76,27 +77,27 @@ var AppStore = assign({}, EventEmitter.prototype, {
 AppDispatcher.register(function(action) {
 
   switch(action.actionType) {
-    case AppConstants.UPDATE_QUERY:
+    case ActionTypes.UPDATE_QUERY:
       updateQuery(action.query);
       AppStore.emitChange();
       break;
 
-    case AppConstants.UPDATE_LAT_LNG:
+    case ActionTypes.UPDATE_LAT_LNG:
       updateLatLng(action.lat, action.lng);
       AppStore.emitChange();
       break;
 
-    case AppConstants.UPDATE_DISTANCE:
+    case ActionTypes.UPDATE_DISTANCE:
       updateDistance(action.distance);
       AppStore.emitChange();
       break;
 
-    case AppConstants.UPDATE_ZOOM:
+    case ActionTypes.UPDATE_ZOOM:
       updateZoom(action.zoom);
       AppStore.emitChange();
       break;
 
-    case AppConstants.UPDATE_TWEET:
+    case ActionTypes.UPDATE_TWEET:
       updateTweet(action.tweet);
       AppStore.emitChange();
       break;
