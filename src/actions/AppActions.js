@@ -1,20 +1,20 @@
 "use strict";
 
-var AppDispatcher = require("../dispatcher/AppDispatcher");
-var AppConstants = require("../constants/AppConstants");
+import AppDispatcher from "../dispatcher/AppDispatcher";
+import { ActionTypes } from "../constants/AppConstants";
 
 var AppActions = {
 
   updateQuery: function(query) {
     AppDispatcher.dispatch({
-      actionType: AppConstants.UPDATE_QUERY,
+      actionType: ActionTypes.UPDATE_QUERY,
       query: query
     });
   },
 
   updateLatLng: function(lat, lng) {
     AppDispatcher.dispatch({
-      actionType: AppConstants.UPDATE_LAT_LNG,
+      actionType: ActionTypes.UPDATE_LAT_LNG,
       lat: lat,
       lng: lng
     });
@@ -22,21 +22,21 @@ var AppActions = {
 
   updateDistance: function(distance) {
     AppDispatcher.dispatch({
-      actionType: AppConstants.UPDATE_DISTANCE,
+      actionType: ActionTypes.UPDATE_DISTANCE,
       distance: distance
     });
   },
 
   updateZoom: function(zoom) {
     AppDispatcher.dispatch({
-      actionType: AppConstants.UPDATE_ZOOM,
+      actionType: ActionTypes.UPDATE_ZOOM,
       zoom: zoom
     });
   },
 
   updateTweet: function(data) {
     AppDispatcher.dispatch({
-      actionType: AppConstants.UPDATE_TWEET,
+      actionType: ActionTypes.UPDATE_TWEET,
       tweet: data
     });
   }
