@@ -1,10 +1,10 @@
-"use strict"
+"use strict";
 
-var React = require("react")
-import PropTypes from 'prop-types'
-import createReactClass from 'create-react-class'
+import React from "react";
+import PropTypes from "prop-types";
+import createReactClass from "create-react-class";
 
-import MapCanvas from './MapCanvas';
+import MapCanvas from "./MapCanvas";
 
 var MapSection = createReactClass({
 
