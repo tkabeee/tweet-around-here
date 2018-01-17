@@ -1,22 +1,18 @@
-"use strict"
+"use strict";
 
-var React = require("react");
-import createReactClass from 'create-react-class'
+import React from "react";
+import createReactClass from "create-react-class";
 
 var AppActions = require("../actions/AppActions");
 var AppStore = require("../stores/AppStore");
 var SearchSection = require("./SearchSection.react");
 var TweetSection = require("./TweetSection.react");
-var MapSection = require("./MapSection.react");
-
-function getStateFromStores() {
-  return AppStore.getAll();
-}
+var MapSection = require("./MapSection");
 
 var App = createReactClass({
 
   getInitialState: function() {
-    return getStateFromStores();
+    return AppStore.getAll();
   },
 
   componentDidMount: function() {
@@ -28,7 +24,8 @@ var App = createReactClass({
   },
 
   _onChange: function() {
-    this.setState(getStateFromStores());
+    // TODO: call action
+    // this.setState(getStateFromStores());
   },
 
   _handleSearchTweet: function() {
