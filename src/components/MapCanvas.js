@@ -1,12 +1,12 @@
-"use strict"
+"use strict";
 
-var React = require("react")
-import PropTypes from 'prop-types'
-import createReactClass from 'create-react-class'
+import React from "react";
+import PropTypes from "prop-types";
+import createReactClass from "create-react-class";
 
-var AppActions = require("../actions/AppActions");
+import AppActions from "../actions/AppActions";
 
-var MapCanvas = createReactClass({
+const MapCanvas = createReactClass({
 
   PropTypes: {
     lat: PropTypes.number.isRequired,
@@ -76,7 +76,7 @@ var MapCanvas = createReactClass({
       if (responses && responses.length > 0) {
         self._updateMarkerAddress(responses[0].formatted_address);
       } else {
-        self._updateMarkerAddress('この場所の周辺情報を取得できませんでした。');
+        self._updateMarkerAddress("この場所の周辺情報を取得できませんでした。");
       }
     });
   },
@@ -115,15 +115,15 @@ var MapCanvas = createReactClass({
     }
     this.gm.circle = new google.maps.Circle({
       center:        new google.maps.LatLng(this.props.lat, this.props.lng),
-      fillColor:     '#ff4500',
+      fillColor:     "#ff4500",
       fillOpacity:   0.2,
       radius:        this.props.within*1000,
-      strokeColor:   '#ff4500',
+      strokeColor:   "#ff4500",
       strokeOpacity: 1,
       strokeWeight:  1
     });
 
-    this.gm.circle.bindTo('center', this.gm.marker, 'position');
+    this.gm.circle.bindTo("center", this.gm.marker, "position");
     this.gm.circle.setMap(this.gm.map);
   },
 
@@ -133,7 +133,7 @@ var MapCanvas = createReactClass({
 
   _handleMapClick: function() {
     var self = this;
-    google.maps.event.addListener(self.gm.map, 'click', function(e) {
+    google.maps.event.addListener(self.gm.map, "click", function(e) {
       var lat = e.latLng.lat();
       var lng = e.latLng.lng();
 
@@ -150,28 +150,28 @@ var MapCanvas = createReactClass({
 
   _handleMapZoomChanged: function() {
     var self = this;
-    google.maps.event.addListener(self.gm.map, 'zoom_changed', function() {
+    google.maps.event.addListener(self.gm.map, "zoom_changed", function() {
       self._updateStateZoomLevel();
     });
   },
 
   _handleMarkerDragStart: function() {
     var self = this;
-    google.maps.event.addListener(self.gm.marker, 'dragstart', function() {
+    google.maps.event.addListener(self.gm.marker, "dragstart", function() {
       self._updateMarkerAddress("Address 取得中…");
     });
   },
 
   _handleMarkerDrag: function() {
     var self = this;
-    google.maps.event.addListener(self.gm.marker, 'drag', function() {
+    google.maps.event.addListener(self.gm.marker, "drag", function() {
       self._updateMarkerPosition("…","…");
     });
   },
 
   _handleMarkerDragEnd: function() {
     var self = this;
-    google.maps.event.addListener(self.gm.marker, 'dragend', function(e) {
+    google.maps.event.addListener(self.gm.marker, "dragend", function(e) {
       var lat = e.latLng.lat();
       var lng = e.latLng.lng();
       self._updateStateLatLng(lat, lng);
@@ -189,4 +189,4 @@ var MapCanvas = createReactClass({
   }
 });
 
-export default MapCanvas
+export default MapCanvas;
