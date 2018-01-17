@@ -28,29 +28,29 @@ function update(key, val) {
 }
 
 function updateQuery(query) {
-  update('query', query);
-  // console.log('updateQuery: ' + query);
+  update("query", query);
+  // console.log("updateQuery: " + query);
 }
 
 function updateLatLng(lat, lng) {
-  update('lat', parseFloat(lat));
-  update('lng', parseFloat(lng));
-  // console.log('updateLatLng: ' + lat + ',' + lng);
+  update("lat", parseFloat(lat));
+  update("lng", parseFloat(lng));
+  // console.log("updateLatLng: " + lat + "," + lng);
 }
 
 function updateDistance(distance) {
-  update('within', parseInt(distance));
-  // console.log('updateDistance: ' + distance);
+  update("within", parseInt(distance));
+  // console.log("updateDistance: " + distance);
 }
 
 function updateZoom(zoom) {
-  update('zoom', parseInt(zoom));
-  // console.log('updateZoom: ' + zoom);
+  update("zoom", parseInt(zoom));
+  // console.log("updateZoom: " + zoom);
 }
 
 function updateTweet(tweet) {
-  update('tweet', tweet);
-  // console.log('updateTweet: ' + tweet);
+  update("tweet", tweet);
+  // console.log("updateTweet: " + tweet);
 }
 
 var AppStore = assign({}, EventEmitter.prototype, {
@@ -107,4 +107,4 @@ AppDispatcher.register(function(action) {
 
 });
 
-export default AppStore
+export default AppStore;
