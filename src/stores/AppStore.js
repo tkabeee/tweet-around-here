@@ -4,7 +4,7 @@ import { ReduceStore } from "flux/utils";
 import assign from "object-assign";
 import EventEmitter from "events";
 
-import { ActionTypes } from "../constants/AppConstants";
+import ActionTypes from "../constants/AppActionTypes";
 import AppDispatcher from "../dispatcher/AppDispatcher";
 import SearchConstants from "../constants/SearchConstants";
 

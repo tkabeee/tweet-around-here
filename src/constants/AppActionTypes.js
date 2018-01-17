@@ -7,3 +7,5 @@ const ActionTypes = {
   UPDATE_ZOOM: "UPDATE_ZOOM",
   UPDATE_TWEET: "UPDATE_TWEET",
 };
+
+export default ActionTypes;

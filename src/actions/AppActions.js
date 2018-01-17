@@ -1,46 +1,46 @@
 "use strict";
 
 import AppDispatcher from "../dispatcher/AppDispatcher";
-import { ActionTypes } from "../constants/AppConstants";
+import ActionTypes from "../constants/AppActionTypes";
 
-var AppActions = {
+const AppActions = {
 
-  updateQuery: function(query) {
+  updateQuery(query) {
     AppDispatcher.dispatch({
-      actionType: ActionTypes.UPDATE_QUERY,
+      type: ActionTypes.UPDATE_QUERY,
       query: query
     });
   },
 
-  updateLatLng: function(lat, lng) {
+  updateLatLng(lat, lng) {
     AppDispatcher.dispatch({
-      actionType: ActionTypes.UPDATE_LAT_LNG,
+      type: ActionTypes.UPDATE_LAT_LNG,
       lat: lat,
       lng: lng
     });
   },
 
-  updateDistance: function(distance) {
+  updateDistance(distance) {
     AppDispatcher.dispatch({
-      actionType: ActionTypes.UPDATE_DISTANCE,
+      type: ActionTypes.UPDATE_DISTANCE,
       distance: distance
     });
   },
 
-  updateZoom: function(zoom) {
+  updateZoom(zoom) {
     AppDispatcher.dispatch({
-      actionType: ActionTypes.UPDATE_ZOOM,
+      type: ActionTypes.UPDATE_ZOOM,
       zoom: zoom
     });
   },
 
-  updateTweet: function(data) {
+  updateTweet(data) {
     AppDispatcher.dispatch({
-      actionType: ActionTypes.UPDATE_TWEET,
+      type: ActionTypes.UPDATE_TWEET,
       tweet: data
     });
   }
 
 };
 
-export default AppActions
+export default AppActions;
