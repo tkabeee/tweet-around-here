@@ -4,14 +4,14 @@ const path = require('path');
 module.exports = {
   // entry point
   entry: [
-    // 'babel-polyfill',
-    './src/app.js',
+    // "babel-polyfill",
+    "./src/app.js",
   ],
   output: {
     // dest dir
     path: path.join(__dirname, 'build'),
     // dest file
-    filename: 'bundle.js'
+    filename: "bundle.js"
   },
   // http://localhost:8080/
   devServer: {
@@ -26,15 +26,15 @@ module.exports = {
         test: /\.js$/,
         use: [
           {
-            loader: 'babel-loader',
+            loader: "babel-loader",
             options: {
               presets: [
                 // env を指定することで、ES2017 を ES5 に変換
                 // {modules: false} にしないと import 文が Babel によって CommonJS に変換され
                 // webpack の Tree Shaking 機能が使えない
-                ['env', {'modules': false}],
+                ["env", {"modules": false}],
                 // React JSX
-                'react'
+                "react"
               ]
             }
           }
@@ -48,7 +48,7 @@ module.exports = {
     extensions: [".js"]
   },
   // ソースマップを有効
-  devtool: 'source-map',
+  devtool: "source-map",
   plugins: [
     // JS minify
     new webpack.optimize.UglifyJsPlugin({

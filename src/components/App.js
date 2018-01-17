@@ -1,8 +1,7 @@
-"use strict"
+"use strict";
 
-import React from 'react';
-
-import createReactClass from 'create-react-class'
+import React from "react";
+import createReactClass from "create-react-class";
 
 var AppActions = require("../actions/AppActions");
 var AppStore = require("../stores/AppStore");
@@ -17,7 +16,7 @@ function getStateFromStores() {
 var App = createReactClass({
 
   getInitialState: function() {
-    return getStateFromStores();
+    return AppStore.getAll();
   },
 
   componentDidMount: function() {
@@ -29,7 +28,8 @@ var App = createReactClass({
   },
 
   _onChange: function() {
-    this.setState(getStateFromStores());
+    // TODO: call action
+    // this.setState(getStateFromStores());
   },
 
   _handleSearchTweet: function() {

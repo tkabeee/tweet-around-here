@@ -106,4 +106,4 @@ AppDispatcher.register(function(action) {
 
 });
 
-export default  AppStore
+export default AppStore
