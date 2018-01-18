@@ -6,7 +6,7 @@ import createReactClass from "create-react-class";
 
 import MapCanvas from "./MapCanvas";
 
-var MapSection = createReactClass({
+const MapSection = createReactClass({
 
   propTypes: {
     states: PropTypes.object.isRequired,
@@ -38,4 +38,4 @@ var MapSection = createReactClass({
   }
 });
 
-export default MapSection
+export default MapSection;
