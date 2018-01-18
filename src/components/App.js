@@ -9,26 +9,26 @@ import SearchSection from "./SearchSection.react";
 import TweetSection from "./TweetSection.react";
 import MapSection from "./MapSection";
 
-var App = createReactClass({
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = AppStore.getState();
+  }
 
-  getInitialState: function() {
-    return AppStore.getAll();
-  },
-
-  componentDidMount: function() {
+  componentDidMount() {
     AppStore.addChangeListener(this._onChange);
-  },
+  }
 
-  componentWillUnmount: function() {
+  componentWillUnmount() {
     AppStore.removeChangeListener(this._onChange);
-  },
+  }
 
-  _onChange: function() {
+  _onChange() {
     // TODO: call action
     // this.setState(getStateFromStores());
-  },
+  }
 
-  _handleSearchTweet: function() {
+  _handleSearchTweet() {
     var params = {
       query: this.state.query.trim(),
       geocode: this.state.lat + "," + this.state.lng + "," + this.state.within + this.state.units,
@@ -59,9 +59,9 @@ var App = createReactClass({
         console.error(this.state.requestUrl, status, err.toString());
       }.bind(this)
     });
-  },
+  }
 
-  render: function() {
+  render() {
     return (
       <div className="">
         <header>
@@ -81,7 +81,4 @@ var App = createReactClass({
       </div>
     );
   }
-
-});
-
-export default App;
+}

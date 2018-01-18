@@ -2,32 +2,37 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import createReactClass from "create-react-class";
 
+import AppStore from "../stores/AppStore";
 import AppActions from "../actions/AppActions";
 
-const MapCanvas = createReactClass({
+export default class MapCanvas extends React.Component {
+  constructor(props) {
+    super(props);
 
-  PropTypes: {
-    lat: PropTypes.number.isRequired,
-    lng: PropTypes.number.isRequired,
-    zoom: PropTypes.number.isRequired,
-    within: PropTypes.number.isRequired,
-  },
-
-  componentDidMount: function() {
-    this._initMap();
-  },
-
-  componentDidUpdate: function() {
-    this._createCircle();
-  },
-
-  _initMap: function() {
+    this.state = AppStore.getState();
     this.gm = {};
+  }
+
+  // static propTypes = {
+  //   lat: PropTypes.number.isRequired,
+  //   lng: PropTypes.number.isRequired,
+  //   zoom: PropTypes.number.isRequired,
+  //   within: PropTypes.number.isRequired,
+  // }
+
+  componentDidMount() {
+    this.initMap();
+  }
+
+  componentDidUpdate() {
+    this.createCircle();
+  }
+
+  initMap() {
     this.gm.map = new google.maps.Map(document.getElementById("mapCanvas"), {
-      zoom:              this.props.zoom,
-      center:            new google.maps.LatLng(this.props.lat, this.props.lng),
+      zoom:              this.state.zoom,
+      center:            new google.maps.LatLng(this.state.lat, this.state.lng),
       mapTypeControl:    false,
       mapTypeId:         google.maps.MapTypeId.ROADMAP,
       panControl:        false,
@@ -38,84 +43,84 @@ const MapCanvas = createReactClass({
 
     this.gm.marker = new google.maps.Marker({
       map: this.gm.map,
-      position: new google.maps.LatLng(this.props.lat, this.props.lng),
+      position: new google.maps.LatLng(this.state.lat, this.state.lng),
       draggable: true
     });
 
     this.gm.geocoder = new google.maps.Geocoder();
     this.gm.infoWindow = new google.maps.InfoWindow();
 
-    this._updateMarkerPosition(this.props.lat, this.props.lng);
-    this._setGeocodePosition();
-    this._setDragEvent();
-    this._createCircle();
+    this.updateMarkerPosition(this.state.lat, this.state.lng);
+    this.setGeocodePosition();
+    this.setDragEvent();
+    this.createCircle();
 
-    this._handleMapClick();
+    this.handleMapClick();
     this._handleMapZoomChanged();
-  },
+  }
 
-  _setMarker: function() {
-    this._deleteMarker();
+  setMarker() {
+    this.deleteMarker();
     this.gm.marker = new google.maps.Marker({
       map: this.gm.map,
-      position: new google.maps.LatLng(this.props.lat, this.props.lng),
+      position: new google.maps.LatLng(this.state.lat, this.state.lng),
       draggable: true
     });
-  },
+  }
 
-  _deleteMarker: function() {
+  deleteMarker() {
     this.gm.marker.setMap(null);
-  },
+  }
 
-  _setGeocodePosition: function() {
+  setGeocodePosition() {
     this.gm.geocoder.geocode({
       latLng: this.gm.marker.getPosition()
     }, (responses) => {
       if (responses && responses.length > 0) {
-        this._updateMarkerAddress(responses[0].formatted_address);
+        this.updateMarkerAddress(responses[0].formatted_address);
       } else {
-        this._updateMarkerAddress("この場所の周辺情報を取得できませんでした。");
+        this.updateMarkerAddress("この場所の周辺情報を取得できませんでした。");
       }
     });
-  },
+  }
 
-  _setDragEvent: function() {
-    this._handleMarkerDragStart();
-    this._handleMarkerDrag();
-    this._handleMarkerDragEnd();
-  },
+  setDragEvent() {
+    this.handleMarkerDragStart();
+    this.handleMarkerDrag();
+    this.handleMarkerDragEnd();
+  }
 
   // マーカーのポジション更新
-  _updateMarkerPosition: function(lat, lng) {
+  updateMarkerPosition(lat, lng) {
     document.getElementById("lat").textContent = lat;
     document.getElementById("lng").textContent = lng;
-  },
+  }
 
   // 経度・緯度の更新
-  _updateStateLatLng: function(lat, lng) {
+  updateStateLatLng(lat, lng) {
     AppActions.updateLatLng(lat, lng);
-  },
+  }
 
   // マーカーの住所を更新
-  _updateMarkerAddress: function(str) {
+  updateMarkerAddress(str) {
     document.getElementById("address").textContent = str;
-  },
+  }
 
   // ズームレベルを更新
-  _updateStateZoomLevel: function() {
+  updateStateZoomLevel() {
     var zoom = this.gm.map.getZoom();
     AppActions.updateZoom(zoom);
-  },
+  }
 
-  _createCircle: function() {
+  createCircle() {
     if (this.gm.circle) {
-      this._deleteCircle();
+      this.deleteCircle();
     }
     this.gm.circle = new google.maps.Circle({
-      center:        new google.maps.LatLng(this.props.lat, this.props.lng),
+      center:        new google.maps.LatLng(this.state.lat, this.state.lng),
       fillColor:     "#ff4500",
       fillOpacity:   0.2,
-      radius:        this.props.within*1000,
+      radius:        this.state.within*1000,
       strokeColor:   "#ff4500",
       strokeOpacity: 1,
       strokeWeight:  1
@@ -123,63 +128,61 @@ const MapCanvas = createReactClass({
 
     this.gm.circle.bindTo("center", this.gm.marker, "position");
     this.gm.circle.setMap(this.gm.map);
-  },
+  }
 
-  _deleteCircle: function() {
+  deleteCircle() {
     this.gm.circle.setMap(null);
-  },
+  }
 
-  _handleMapClick: function() {
+  handleMapClick() {
     google.maps.event.addListener(this.gm.map, "click", (e) => {
       var lat = e.latLng.lat();
       var lng = e.latLng.lng();
 
-      this._updateStateLatLng(lat, lng);
-      this._updateMarkerPosition(lat.toFixed(6), lng.toFixed(6));
-      this._setMarker();
-      this._setGeocodePosition();
-      this._setDragEvent();
-      this._createCircle();
+      this.updateStateLatLng(lat, lng);
+      this.updateMarkerPosition(lat.toFixed(6), lng.toFixed(6));
+      this.setMarker();
+      this.setGeocodePosition();
+      this.setDragEvent();
+      this.createCircle();
 
-      this.props.onSearchTweet();
+      this.state.onSearchTweet();
     });
-  },
+  }
 
-  _handleMapZoomChanged: function() {
+  handleMapZoomChanged() {
     google.maps.event.addListener(this.gm.map, "zoom_changed", () => {
-      this._updateStateZoomLevel();
+      this.updateStateZoomLevel();
     });
-  },
+  }
 
-  _handleMarkerDragStart: function() {
+  handleMarkerDragStart() {
     google.maps.event.addListener(this.gm.marker, "dragstart", () => {
-      this._updateMarkerAddress("Address 取得中…");
+      this.updateMarkerAddress("Address 取得中…");
     });
-  },
+  }
 
-  _handleMarkerDrag: function() {
+  handleMarkerDrag() {
     google.maps.event.addListener(this.gm.marker, "drag", () => {
-      this._updateMarkerPosition("…","…");
+      this.updateMarkerPosition("…","…");
     });
-  },
+  }
 
-  _handleMarkerDragEnd: function() {
+  handleMarkerDragEnd() {
     google.maps.event.addListener(this.gm.marker, "dragend", (e) => {
       var lat = e.latLng.lat();
       var lng = e.latLng.lng();
-      this._updateStateLatLng(lat, lng);
-      this._updateMarkerPosition(lat.toFixed(6), lng.toFixed(6));
-      this._setGeocodePosition();
+      this.updateStateLatLng(lat, lng);
+      this.updateMarkerPosition(lat.toFixed(6), lng.toFixed(6));
+      this.setGeocodePosition();
 
-      this.props.onSearchTweet();
+      this.state.onSearchTweet();
     });
-  },
+  }
 
-  render: function() {
+  render() {
     return (
       <div id="mapCanvas"></div>
     );
   }
-});
-
-export default MapCanvas;
+}

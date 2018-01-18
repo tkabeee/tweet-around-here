@@ -1,7 +1,6 @@
 "use strict";
 
-import { ReduceStore } from "flux/utils";
-import assign from "object-assign";
+// import { ReduceStore } from "flux/utils";
 import EventEmitter from "events";
 
 import ActionTypes from "../constants/AppActionTypes";
@@ -10,7 +9,7 @@ import SearchConstants from "../constants/SearchConstants";
 
 var CHANGE_EVENT = "change";
 
-var _state = {
+const _state = {
   query: SearchConstants.INIT_QUERY,
   lat: SearchConstants.INIT_LAT,
   lng: SearchConstants.INIT_LNG,
@@ -23,88 +22,60 @@ var _state = {
   tweet: []
 };
 
-function update(key, val) {
-  _state[key] = val;
-}
+class AppStore extends EventEmitter {
 
-function updateQuery(query) {
-  update("query", query);
-  // console.log("updateQuery: " + query);
-}
-
-function updateLatLng(lat, lng) {
-  update("lat", parseFloat(lat));
-  update("lng", parseFloat(lng));
-  // console.log("updateLatLng: " + lat + "," + lng);
-}
-
-function updateDistance(distance) {
-  update("within", parseInt(distance));
-  // console.log("updateDistance: " + distance);
-}
-
-function updateZoom(zoom) {
-  update("zoom", parseInt(zoom));
-  // console.log("updateZoom: " + zoom);
-}
-
-function updateTweet(tweet) {
-  update("tweet", tweet);
-  // console.log("updateTweet: " + tweet);
-}
-
-var AppStore = assign({}, EventEmitter.prototype, {
-
-  getAll: function() {
-    return _state;
-  },
-
-  emitChange: function() {
-    this.emit(CHANGE_EVENT);
-  },
-
-  addChangeListener: function(callback) {
-    this.on(CHANGE_EVENT, callback);
-  },
-
-  removeChangeListener: function(callback) {
-    this.removeListener(CHANGE_EVENT, callback);
+  constructor() {
+    super();
   }
 
-});
+  getState() {
+    return _state;
+  }
+
+  emitChange() {
+    this.emit(CHANGE_EVENT);
+  }
+
+  addChangeListener(callback) {
+    this.on(CHANGE_EVENT, callback);
+  }
+
+  removeChangeListener(callback) {
+    this.removeListener(CHANGE_EVENT, callback);
+  }
+}
 
 // Register callback to handle all updates
-AppDispatcher.register(function(action) {
+AppDispatcher.register((action) => {
 
   switch(action.type) {
     case ActionTypes.UPDATE_QUERY:
-      updateQuery(action.query);
-      AppStore.emitChange();
+      _state.query = action.query;
       break;
 
     case ActionTypes.UPDATE_LAT_LNG:
-      updateLatLng(action.lat, action.lng);
-      AppStore.emitChange();
+      _state.lat = parseFloat(action.lat);
+      _state.lng = parseFloat(action.lng);
       break;
 
     case ActionTypes.UPDATE_DISTANCE:
-      updateDistance(action.distance);
-      AppStore.emitChange();
+      _state.within = parseInt(action.distance);
       break;
 
     case ActionTypes.UPDATE_ZOOM:
-      updateZoom(action.zoom);
-      AppStore.emitChange();
+      _state.zoom = parseInt(action.zoom);
       break;
 
     case ActionTypes.UPDATE_TWEET:
-      updateTweet(action.tweet);
-      AppStore.emitChange();
+      _state.tweet = action.tweet;
       break;
 
     default:
+      return;
   }
 
+  appStoreInstance.emitChange();
 });
 
-export default AppStore;
+const appStoreInstance = new AppStore();
+export default appStoreInstance;
