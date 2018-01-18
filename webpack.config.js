@@ -1,5 +1,5 @@
-const webpack = require('webpack');
-const path = require('path');
+const webpack = require("webpack");
+const path = require("path");
 
 module.exports = {
   // entry point
@@ -9,13 +9,13 @@ module.exports = {
   ],
   output: {
     // dest dir
-    path: path.join(__dirname, 'build'),
+    path: path.join(__dirname, "build"),
     // dest file
     filename: "bundle.js"
   },
   // http://localhost:8080/
   devServer: {
-    contentBase: 'build',
+    contentBase: "build",
     port: 8080,
     inline: true,
     hot: true
@@ -55,4 +55,4 @@ module.exports = {
       sourceMap: true
     })
   ]
-}
+};
