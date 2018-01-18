@@ -29,7 +29,6 @@ var App = createReactClass({
   },
 
   _handleSearchTweet: function() {
-    var self = this;
     var params = {
       query: this.state.query.trim(),
       geocode: this.state.lat + "," + this.state.lng + "," + this.state.within + this.state.units,
