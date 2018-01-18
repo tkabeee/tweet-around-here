@@ -1,7 +1,7 @@
 "use strict";
 
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
 import AppStore from "../stores/AppStore";
 import AppActions from "../actions/AppActions";
