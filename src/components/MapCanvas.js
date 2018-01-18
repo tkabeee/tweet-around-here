@@ -56,7 +56,7 @@ export default class MapCanvas extends React.Component {
     this.createCircle();
 
     this.handleMapClick();
-    this._handleMapZoomChanged();
+    this.handleMapZoomChanged();
   }
 
   setMarker() {
