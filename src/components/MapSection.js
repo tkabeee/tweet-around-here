@@ -25,8 +25,8 @@ export default class MapSection extends React.Component {
         />
         <div id="positionInfo">
           <p className="latlng">
-            Lat：<span id="lat">{this.state.lat}</span>&nbsp;&nbsp;&nbsp;
-            Lng：<span id="lng">{this.state.lng}</span>
+            Lat:&nbsp;<span id="lat">{this.state.lat}</span>&nbsp;&nbsp;
+            Lng:&nbsp;<span id="lng">{this.state.lng}</span>
           </p>
           <p className="address"><span id="address">Address 取得中…</span></p>
         </div>
