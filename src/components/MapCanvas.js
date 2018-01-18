@@ -146,6 +146,7 @@ export default class MapCanvas extends React.Component {
       this.setDragEvent();
       this.createCircle();
 
+      // TODO: call action
       this.state.onSearchTweet();
     });
   }
