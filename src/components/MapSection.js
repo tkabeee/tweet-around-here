@@ -11,11 +11,6 @@ export default class MapSection extends React.Component {
     super(props);
   }
 
-  static propsTypes = {
-    lat: React.PropTypes.number,
-    lng: React.PropTypes.number,
-  }
-
   render() {
     return (
       <div id="mapSection" className="map-section">
@@ -34,3 +29,8 @@ export default class MapSection extends React.Component {
     );
   }
 }
+
+MapSection.propsTypes = {
+  lat: React.PropTypes.string,
+  lng: React.PropTypes.string,
+};

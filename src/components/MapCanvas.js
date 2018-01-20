@@ -12,13 +12,6 @@ export default class MapCanvas extends React.Component {
     this.gm = {};
   }
 
-  static propTypes = {
-    lat: React.PropTypes.number,
-    lng: React.PropTypes.number,
-    zoom: React.PropTypes.number,
-    within: React.PropTypes.number,
-  }
-
   componentDidMount() {
     this.initMap();
   }
@@ -187,3 +180,10 @@ export default class MapCanvas extends React.Component {
     );
   }
 }
+
+MapCanvas.propTypes = {
+  lat: React.PropTypes.string,
+  lng: React.PropTypes.string,
+  zoom: React.PropTypes.number,
+  within: React.PropTypes.number,
+};
