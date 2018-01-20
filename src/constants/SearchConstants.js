@@ -17,7 +17,7 @@ export default {
   INIT_RPP: 20,
 
   // ズーム値
-  INIT_ZOOM: 10,
+  INIT_ZOOM: 9,
 
   // twitter検索時の距離単位
   UNITS: "km",

@@ -70,8 +70,6 @@ export default class SearchForm extends React.Component {
           <span className="search-submit">
             <button id="submit_post"> 検 索 </button>
           </span>
-          <input type="hidden" id="rpp" name="rpp" value={this.props.rpp} />
-          <input type="hidden" id="zoom" name="zoom" value={this.props.zoom} />
         </form>
       </div>
     );

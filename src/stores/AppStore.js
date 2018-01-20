@@ -16,8 +16,6 @@ const appState = {
   within: SearchConstants.INIT_WITHIN,
   rpp: SearchConstants.INIT_RPP,
   zoom: SearchConstants.INIT_ZOOM,
-  requestUrl: SearchConstants.REQUEST_URL,
-  units: SearchConstants.UNITS,
   tweet: []
 };
 

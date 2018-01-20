@@ -4,6 +4,7 @@ import React from "react";
 
 import AppActions from "../actions/AppActions";
 import AppStore from "../stores/AppStore";
+import SearchConstants from "../constants/SearchConstants";
 import SearchSection from "./SearchSection";
 import SearchForm from "./SearchForm";
 import TweetSection from "./TweetSection";
@@ -30,13 +31,13 @@ export default class App extends React.Component {
   }
 
   handleSearchTweet() {
-    var params = {
+    const params = {
       query: this.state.query.trim(),
-      geocode: this.state.lat + "," + this.state.lng + "," + this.state.within + this.state.units,
+      geocode: this.state.lat + "," + this.state.lng + "," + this.state.within + SearchConstants.UNITS,
       rpp: this.state.rpp
     };
     $.ajax({
-      url: this.state.requestUrl,
+      url: SearchConstants.REQUEST_URL,
       method: "POST",
       dataType: "json",
       cache: false,
