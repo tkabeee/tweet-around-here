@@ -1,0 +1,11 @@
+"use strict";
+
+const ActionTypes = {
+  UPDATE_QUERY: "UPDATE_QUERY",
+  UPDATE_LAT_LNG: "UPDATE_LAT_LNG",
+  UPDATE_DISTANCE: "UPDATE_DISTANCE",
+  UPDATE_ZOOM: "UPDATE_ZOOM",
+  UPDATE_TWEET: "UPDATE_TWEET",
+};
+
+export default ActionTypes;
