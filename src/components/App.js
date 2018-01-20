@@ -76,7 +76,7 @@ export default class App extends React.Component {
                 lng={this.state.lng}
                 zoom={this.state.zoom}
                 within={this.state.within}
-                onSearchTweet={this.handleSearchTweet()}
+                onSearchTweet={() => this.handleSearchTweet()}
               />
             </MapSection>
           </div>
