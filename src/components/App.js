@@ -74,7 +74,10 @@ export default class App extends React.Component {
             {/* <TweetSection tweet={this.state.tweet} /> */}
           </div>
           <div id="mainContent">
-            <MapSection states={this.state} onSearchTweet={this._handleSearchTweet} />
+            <MapSection
+              lat={this.state.lat}
+              lng={this.state.lng}
+            />
           </div>
         </div>
       </div>
