@@ -69,7 +69,7 @@ export default class App extends React.Component {
               within={this.state.within}
               rpp={this.state.rpp}
               zoom={this.state.zoom}
-              onFormSubmit={() => this.handleSearchTweet()}
+              onSearchTweet={() => this.handleSearchTweet()}
             >
             </SearchForm>
           </SearchSection>

@@ -31,11 +31,12 @@ export default class SearchForm extends React.Component {
 
   handleWithinChange(e) {
     AppActions.updateDistance(e.target.value);
+    this.props.onSearchTweet();
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.onFormSubmit();
+    this.props.onSearchTweet();
   }
 
   render() {
