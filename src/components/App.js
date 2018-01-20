@@ -16,16 +16,15 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    AppStore.addChangeListener(this._onChange);
+    AppStore.addChangeListener(() => {
+      this.setState(AppStore.getState);
+    });
   }
 
   componentWillUnmount() {
-    AppStore.removeChangeListener(this._onChange);
-  }
-
-  _onChange() {
-    // TODO: call action
-    // this.setState(getStateFromStores());
+    AppStore.removeChangeListener(() => {
+      this.setState(AppStore.getState);
+    });
   }
 
   _handleSearchTweet() {
