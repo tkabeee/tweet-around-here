@@ -1,7 +1,6 @@
 "use strict";
 
 import React from "react";
-// import PropTypes from "prop-types";
 
 import AppStore from "../stores/AppStore";
 import AppActions from "../actions/AppActions";
@@ -10,16 +9,15 @@ export default class MapCanvas extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = AppStore.getState();
     this.gm = {};
   }
 
-  // static propTypes = {
-  //   lat: PropTypes.number.isRequired,
-  //   lng: PropTypes.number.isRequired,
-  //   zoom: PropTypes.number.isRequired,
-  //   within: PropTypes.number.isRequired,
-  // }
+  static propTypes = {
+    lat: React.PropTypes.number,
+    lng: React.PropTypes.number,
+    zoom: React.PropTypes.number,
+    within: React.PropTypes.number,
+  }
 
   componentDidMount() {
     this.initMap();
@@ -31,8 +29,8 @@ export default class MapCanvas extends React.Component {
 
   initMap() {
     this.gm.map = new google.maps.Map(document.getElementById("mapCanvas"), {
-      zoom:              this.state.zoom,
-      center:            new google.maps.LatLng(this.state.lat, this.state.lng),
+      zoom:              this.props.zoom,
+      center:            new google.maps.LatLng(this.props.lat, this.props.lng),
       mapTypeControl:    false,
       mapTypeId:         google.maps.MapTypeId.ROADMAP,
       panControl:        false,
@@ -43,14 +41,14 @@ export default class MapCanvas extends React.Component {
 
     this.gm.marker = new google.maps.Marker({
       map: this.gm.map,
-      position: new google.maps.LatLng(this.state.lat, this.state.lng),
+      position: new google.maps.LatLng(this.props.lat, this.props.lng),
       draggable: true
     });
 
     this.gm.geocoder = new google.maps.Geocoder();
     this.gm.infoWindow = new google.maps.InfoWindow();
 
-    this.updateMarkerPosition(this.state.lat, this.state.lng);
+    this.updateMarkerPosition(this.props.lat, this.props.lng);
     this.setGeocodePosition();
     this.setDragEvent();
     this.createCircle();
@@ -63,7 +61,7 @@ export default class MapCanvas extends React.Component {
     this.deleteMarker();
     this.gm.marker = new google.maps.Marker({
       map: this.gm.map,
-      position: new google.maps.LatLng(this.state.lat, this.state.lng),
+      position: new google.maps.LatLng(this.props.lat, this.props.lng),
       draggable: true
     });
   }
@@ -117,10 +115,10 @@ export default class MapCanvas extends React.Component {
       this.deleteCircle();
     }
     this.gm.circle = new google.maps.Circle({
-      center:        new google.maps.LatLng(this.state.lat, this.state.lng),
+      center:        new google.maps.LatLng(this.props.lat, this.props.lng),
       fillColor:     "#ff4500",
       fillOpacity:   0.2,
-      radius:        this.state.within*1000,
+      radius:        this.props.within*1000,
       strokeColor:   "#ff4500",
       strokeOpacity: 1,
       strokeWeight:  1
@@ -148,7 +146,7 @@ export default class MapCanvas extends React.Component {
       this.createCircle();
 
       // TODO: call action
-      this.state.onSearchTweet();
+      this.props.onSearchTweet();
     });
   }
 
@@ -179,7 +177,7 @@ export default class MapCanvas extends React.Component {
       // this.updateMarkerPosition(lat.toFixed(6), lng.toFixed(6));
       this.setGeocodePosition();
 
-      this.state.onSearchTweet();
+      this.props.onSearchTweet();
     });
   }
 

@@ -8,6 +8,7 @@ import AppStore from "../stores/AppStore";
 import SearchSection from "./SearchSection.react";
 import TweetSection from "./TweetSection.react";
 import MapSection from "./MapSection";
+import MapCanvas from "./MapCanvas";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -77,7 +78,14 @@ export default class App extends React.Component {
             <MapSection
               lat={this.state.lat}
               lng={this.state.lng}
-            />
+            >
+              <MapCanvas
+                lat={this.state.lat}
+                lng={this.state.lng}
+                zoom={this.state.zoom}
+                within={this.state.within}
+              />
+            </MapSection>
           </div>
         </div>
       </div>

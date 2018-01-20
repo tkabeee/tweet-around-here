@@ -9,17 +9,17 @@ import MapCanvas from "./MapCanvas";
 export default class MapSection extends React.Component {
   constructor(props) {
     super(props);
+  }
 
-    this.propsTypes = {
-      lat: React.PropTypes.number,
-      lng: React.PropTypes.number
-    };
+  static propsTypes = {
+    lat: React.PropTypes.number,
+    lng: React.PropTypes.number,
   }
 
   render() {
     return (
       <div id="mapSection" className="map-section">
-        <MapCanvas />
+        {this.props.children}
         <div id="positionInfo">
           <p className="latlng">
             Lat:&nbsp;<span id="lat">{this.props.lat}</span>&nbsp;&nbsp;
