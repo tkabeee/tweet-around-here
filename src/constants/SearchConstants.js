@@ -14,7 +14,8 @@ export default {
   INIT_WITHIN: 20,
 
   // 検索数
-  INIT_RPP: 20,
+  // up to a maximum of 100. Defaults to 15.
+  INIT_RPP: 30,
 
   // ズーム値
   INIT_ZOOM: 9,
