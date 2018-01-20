@@ -7,7 +7,3 @@ node_modules/
 
 ### Sass ###
 .sass-cache
-
-### JS ###
-build/*
-!build/.gitkeep
