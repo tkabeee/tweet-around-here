@@ -177,8 +177,9 @@ export default class MapCanvas extends React.Component {
 }
 
 MapCanvas.propTypes = {
-  lat: React.PropTypes.string,
-  lng: React.PropTypes.string,
+  lat: React.PropTypes.number,
+  lng: React.PropTypes.number,
   zoom: React.PropTypes.number,
   within: React.PropTypes.number,
+  onSearchTweet: React.PropTypes.func,
 };

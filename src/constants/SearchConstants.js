@@ -5,10 +5,10 @@ export default {
   INIT_QUERY: "",
 
   // 緯度
-  INIT_LAT: "35.689488",
+  INIT_LAT: 35.689488,
 
   // 経度
-  INIT_LNG: "139.691706",
+  INIT_LNG: 139.691706,
 
   // サークル距離
   INIT_WITHIN: 20,

@@ -31,6 +31,6 @@ export default class MapSection extends React.Component {
 }
 
 MapSection.propsTypes = {
-  lat: React.PropTypes.string,
-  lng: React.PropTypes.string,
+  lat: React.PropTypes.number,
+  lng: React.PropTypes.number,
 };
