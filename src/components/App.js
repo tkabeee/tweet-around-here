@@ -1,12 +1,12 @@
 "use strict";
 
 import React from "react";
-import createReactClass from "create-react-class";
 
 import AppActions from "../actions/AppActions";
 import AppStore from "../stores/AppStore";
 import SearchSection from "./SearchSection.react";
-import TweetSection from "./TweetSection.react";
+import TweetSection from "./TweetSection";
+import TweetList from "./TweetList";
 import MapSection from "./MapSection";
 import MapCanvas from "./MapCanvas";
 
@@ -64,7 +64,12 @@ export default class App extends React.Component {
         </header>
         <div id="container">
           <div id="leftSide">
-            {/* <TweetSection tweet={this.state.tweet} /> */}
+            <TweetSection>
+              <TweetList
+                tweet={this.state.tweet}
+              >
+              </TweetList>
+            </TweetSection>
           </div>
           <div id="mainContent">
             <MapSection

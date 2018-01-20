@@ -1,22 +1,20 @@
-"use strict"
+"use strict";
 
-var React = require("react")
-import createReactClass from 'create-react-class'
+var React = require("react");
 
-var TweetList = createReactClass({
+export default class TweetList extends React.Component {
 
-  _replaceTweetLink: function(txt) {
-    return txt.replace(/((ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&amp;%@!&#45;\/]))?)/g,'<a href="$1">$1</a>')
-      .replace(/(^|\s)(@|＠)(\w+)/g,'$1<a href="http://www.twitter.com/$3">@$3</a>')
-      .replace(/(?:^|[^ーー゛゜々ヾヽぁ-ヶ一-龠ａ-ｚＡ-Ｚ０-９a-zA-Z0-9&_/>]+)[#＃]([ー゛゜々ヾヽぁ-ヶ一-龠ａ-ｚＡ-Ｚ０-９a-zA-Z0-9_]*[ー゛゜々ヾヽぁ-ヶ一-龠ａ-ｚＡ-Ｚ０-９a-zA-Z]+[ー゛゜々ヾヽぁ-ヶ一-龠ａ-ｚＡ-Ｚ０-９a-zA-Z0-9_]*)/ig, ' <a href="http://twitter.com/search?q=%23$1">#$1</a>')
-      .replace(/[\n\r]/g, "<br>")
-      ;
-  },
+  replaceTweetLink(txt) {
+    return txt.replace(/((ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&amp;%@!&#45;\\/]))?)/g,"<a href=\"$1:\">$1</a>")
+      .replace(/(^|\s)(@|＠)(\w+)/g,"$1<a href='http://www.twitter.com/$3'>@$3</a>")
+      .replace(/(?:^|[^ーー゛゜々ヾヽぁ-ヶ一-龠ａ-ｚＡ-Ｚ０-９a-zA-Z0-9&_/>]+)[#＃]([ー゛゜々ヾヽぁ-ヶ一-龠ａ-ｚＡ-Ｚ０-９a-zA-Z0-9_]*[ー゛゜々ヾヽぁ-ヶ一-龠ａ-ｚＡ-Ｚ０-９a-zA-Z]+[ー゛゜々ヾヽぁ-ヶ一-龠ａ-ｚＡ-Ｚ０-９a-zA-Z0-9_]*)/ig, " <a href=\"http://twitter.com/search?q=%23$1\">#$1</a>")
+      .replace(/[\n\r]/g, "<br>");
+  }
 
-  _formatTimestamp: function (a) {
+  formatTimestamp(a) {
     var b = new Date,
-        c = parseInt((b.getTime() - Date.parse(a)) / 1E3),
-        d = "";
+      c = parseInt((b.getTime() - Date.parse(a)) / 1E3),
+      d = "";
     if (c < 60) {
       d += c + "秒" + (c == 1 ? "" : "") + "前";
     }
@@ -41,14 +39,13 @@ var TweetList = createReactClass({
       // d += " (" + b + "日" + (b == 1 ? "" : "s") + "前)"
     }
     return d;
-  },
+  }
 
-  render: function() {
-    var self = this;
-    var tweetListItems = this.props.tweetData.map(function(data, index) {
+  render() {
+    var tweetListItems = this.props.tweet.map((data, index) => {
       var baseHref = "//twitter.com/";
-      var timestamp = self._formatTimestamp(data.created_at);
-      var tweet = self._replaceTweetLink(data.text);
+      var timestamp = this.formatTimestamp(data.created_at);
+      var tweet = this.replaceTweetLink(data.text);
       return (
         <li key={index} className="stream-list-item">
           <div className="tweet">
@@ -59,7 +56,7 @@ var TweetList = createReactClass({
                   <strong className="fullname">{data.user.name}</strong><span className="username"><s>@</s><b>{data.user.screen_name}</b></span>
                 </a>
                 <small className="time">
-                  <a href={'//twitter.com/' + data.user.screen_name + '/status/' + data.id_str} className="tweet-timestamp">
+                  <a href={"//twitter.com/" + data.user.screen_name + "/status/" + data.id_str} className="tweet-timestamp">
                     <span className="timestamp">{timestamp}</span>
                   </a>
                 </small>
@@ -76,7 +73,4 @@ var TweetList = createReactClass({
       </ol>
     );
   }
-
-});
-
-export default TweetList
+}
