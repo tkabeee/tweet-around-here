@@ -17,8 +17,8 @@ export default class MapSection extends React.Component {
         {this.props.children}
         <div id="positionInfo">
           <p className="latlng">
-            Lat:&nbsp;<span id="lat">{this.props.lat}</span>&nbsp;&nbsp;
-            Lng:&nbsp;<span id="lng">{this.props.lng}</span>
+            Lat:&nbsp;<span id="lat">{Number(this.props.lat).toFixed(6)}</span>&nbsp;&nbsp;
+            Lng:&nbsp;<span id="lng">{Number(this.props.lng).toFixed(6)}</span>
           </p>
           <p className="address">
             <span id="address">Address 取得中…</span>
