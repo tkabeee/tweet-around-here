@@ -1,7 +1,7 @@
 const webpack = require("webpack");
 const path = require("path");
 
-module.exports = {
+const config = {
   // entry point
   entry: [
     // "babel-polyfill",
@@ -9,7 +9,7 @@ module.exports = {
   ],
   output: {
     // dest dir
-    path: path.join(__dirname, "build"),
+    path: path.resolve(__dirname, "build"),
     // dest file
     filename: "bundle.js"
   },
@@ -56,3 +56,5 @@ module.exports = {
     })
   ]
 };
+
+module.exports = config;
