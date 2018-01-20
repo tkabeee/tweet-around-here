@@ -19,9 +19,6 @@ export default {
   // ズーム値
   INIT_ZOOM: 10,
 
-  // サークル距離範囲
-  DISTANCES: [2, 5, 10, 20, 30, 40, 50, 100],
-
   // twitter検索時の距離単位
   UNITS: "km",
 

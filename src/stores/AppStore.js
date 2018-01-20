@@ -17,7 +17,6 @@ const appState = {
   rpp: SearchConstants.INIT_RPP,
   zoom: SearchConstants.INIT_ZOOM,
   requestUrl: SearchConstants.REQUEST_URL,
-  distances: SearchConstants.DISTANCES,
   units: SearchConstants.UNITS,
   tweet: []
 };
