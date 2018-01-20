@@ -28,7 +28,7 @@ export default class App extends React.Component {
     });
   }
 
-  _handleSearchTweet() {
+  handleSearchTweet() {
     var params = {
       query: this.state.query.trim(),
       geocode: this.state.lat + "," + this.state.lng + "," + this.state.within + this.state.units,
@@ -44,20 +44,12 @@ export default class App extends React.Component {
         geocode: params.geocode,
         count: params.rpp
       },
-      // context: document.body,
-      success: function(data) {
-        // for(var i in data.statuses) {
-        //   console.log(data.statuses[i]);
-        //   console.log("name: "+data.statuses[i].user.name);
-        //   console.log("screen_name: @"+data.statuses[i].user.screen_name);
-        //   console.log("created_at: "+data.statuses[i].created_at);
-        //   console.log("text: "+data.statuses[i].text);
-        // }
+      success: (data) => {
         AppActions.updateTweet(data.statuses);
-      }.bind(this),
-      error: function(xhr, status, err) {
+      },
+      error: (xhr, status, err) => {
         console.error(this.state.requestUrl, status, err.toString());
-      }.bind(this)
+      }
     });
   }
 
@@ -84,6 +76,7 @@ export default class App extends React.Component {
                 lng={this.state.lng}
                 zoom={this.state.zoom}
                 within={this.state.within}
+                onSearchTweet={this.handleSearchTweet()}
               />
             </MapSection>
           </div>
