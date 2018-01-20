@@ -9,4 +9,5 @@ node_modules/
 .sass-cache
 
 ### Sample ###
+# $ starter-react-flux init
 starter/
