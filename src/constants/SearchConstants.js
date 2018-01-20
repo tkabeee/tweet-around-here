@@ -22,6 +22,10 @@ export default {
   // twitter検索時の距離単位
   UNITS: "km",
 
+  // サークルレンジの最小・最大値
+  MIN_CIRCLE_RANGE: 2,
+  MAX_CIRCLE_RANGE: 500,
+
   // twitter検索用API
   REQUEST_URL: "https://twttr-rest.herokuapp.com/search.php",
 

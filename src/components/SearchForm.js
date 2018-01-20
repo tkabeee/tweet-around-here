@@ -3,6 +3,7 @@
 import React from "react";
 
 import AppActions from "../actions/AppActions";
+import SearchConstants from "../constants/SearchConstants";
 
 export default class SearchForm extends React.Component {
   constructor(props) {
@@ -46,8 +47,8 @@ export default class SearchForm extends React.Component {
               id="within"
               type="range"
               name="within"
-              min="2"
-              max="100"
+              min={SearchConstants.MIN_CIRCLE_RANGE}
+              max={SearchConstants.MAX_CIRCLE_RANGE}
               defaultValue={this.props.within}
               onChange={(e) => this.handleWithinChange(e)}
             />
