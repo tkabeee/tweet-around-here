@@ -9,7 +9,7 @@ import SearchConstants from "../constants/SearchConstants";
 
 var CHANGE_EVENT = "change";
 
-const _state = {
+const appState = {
   query: SearchConstants.INIT_QUERY,
   lat: SearchConstants.INIT_LAT,
   lng: SearchConstants.INIT_LNG,
@@ -29,7 +29,7 @@ class AppStore extends EventEmitter {
   }
 
   getState() {
-    return _state;
+    return appState;
   }
 
   emitChange() {
@@ -45,29 +45,30 @@ class AppStore extends EventEmitter {
   }
 }
 
-// Register callback to handle all updates
-AppDispatcher.register((action) => {
+const appStoreInstance = new AppStore();
+
+appStoreInstance.dispatchToken = AppDispatcher.register((action) => {
 
   switch(action.type) {
     case ActionTypes.UPDATE_QUERY:
-      _state.query = action.query;
+      appState.query = action.query;
       break;
 
     case ActionTypes.UPDATE_LAT_LNG:
-      _state.lat = parseFloat(action.lat);
-      _state.lng = parseFloat(action.lng);
+      appState.lat = parseFloat(action.lat);
+      appState.lng = parseFloat(action.lng);
       break;
 
     case ActionTypes.UPDATE_DISTANCE:
-      _state.within = parseInt(action.distance);
+      appState.within = parseInt(action.distance);
       break;
 
     case ActionTypes.UPDATE_ZOOM:
-      _state.zoom = parseInt(action.zoom);
+      appState.zoom = parseInt(action.zoom);
       break;
 
     case ActionTypes.UPDATE_TWEET:
-      _state.tweet = action.tweet;
+      appState.tweet = action.tweet;
       break;
 
     default:
@@ -77,5 +78,4 @@ AppDispatcher.register((action) => {
   appStoreInstance.emitChange();
 });
 
-const appStoreInstance = new AppStore();
 export default appStoreInstance;
