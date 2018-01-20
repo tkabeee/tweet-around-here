@@ -20,11 +20,11 @@ export default class TweetList extends React.Component {
     }
     else if (c < 3600) {
       b = parseInt((c + 30) / 60);
-      d += b + "分" + (b == 1 ? "" : "") + "前"
+      d += b + "分" + (b == 1 ? "" : "") + "前";
     }
     else if (c < 86400) {
       b = parseInt((c + 1800) / 3600);
-      d += b + "時間" + (b == 1 ? "" : "") + "前"
+      d += b + "時間" + (b == 1 ? "" : "") + "前";
     }
     else
     {
@@ -42,10 +42,10 @@ export default class TweetList extends React.Component {
   }
 
   render() {
-    var tweetListItems = this.props.tweet.map((data, index) => {
-      var baseHref = "//twitter.com/";
-      var timestamp = this.formatTimestamp(data.created_at);
-      var tweet = this.replaceTweetLink(data.text);
+    const baseHref = "//twitter.com/";
+    const tweetListItems = this.props.tweet.map((data, index) => {
+      const timestamp = this.formatTimestamp(data.created_at);
+      const tweet = this.replaceTweetLink(data.text);
       return (
         <li key={index} className="stream-list-item">
           <div className="tweet">
