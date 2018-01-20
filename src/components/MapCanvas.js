@@ -131,14 +131,11 @@ export default class MapCanvas extends React.Component {
       var lng = e.latLng.lng();
 
       this.updateStateLatLng(lat, lng);
-      // TODO: stateで更新される
-      // this.updateMarkerPosition(lat.toFixed(6), lng.toFixed(6));
       this.setMarker();
       this.setGeocodePosition();
       this.setDragEvent();
       this.createCircle();
 
-      // TODO: call action
       this.props.onSearchTweet();
     });
   }
@@ -166,8 +163,6 @@ export default class MapCanvas extends React.Component {
       var lat = e.latLng.lat();
       var lng = e.latLng.lng();
       this.updateStateLatLng(lat, lng);
-      // TODO: stateで更新される
-      // this.updateMarkerPosition(lat.toFixed(6), lng.toFixed(6));
       this.setGeocodePosition();
 
       this.props.onSearchTweet();
