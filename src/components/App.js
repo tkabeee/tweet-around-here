@@ -4,7 +4,8 @@ import React from "react";
 
 import AppActions from "../actions/AppActions";
 import AppStore from "../stores/AppStore";
-import SearchSection from "./SearchSection.react";
+import SearchSection from "./SearchSection";
+import SearchForm from "./SearchForm";
 import TweetSection from "./TweetSection";
 import TweetList from "./TweetList";
 import MapSection from "./MapSection";
@@ -60,7 +61,18 @@ export default class App extends React.Component {
           <div className="header-left">
             <h1><a href="//tkabeee.github.io/tweet-around-here" target="_self">Tweet Around Here</a></h1>
           </div>
-          {/* <SearchSection states={this.state} onSearchTweet={this._handleSearchTweet} /> */}
+          <SearchSection
+            onSearchTweet={() => this.handleSearchTweet()}
+          >
+            <SearchForm
+              query={this.state.query}
+              within={this.state.within}
+              rpp={this.state.rpp}
+              zoom={this.state.zoom}
+              onFormSubmit={() => this.handleSearchTweet()}
+            >
+            </SearchForm>
+          </SearchSection>
         </header>
         <div id="container">
           <div id="leftSide">
