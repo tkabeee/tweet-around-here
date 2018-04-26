@@ -5,7 +5,7 @@ import EventEmitter from "events";
 import ActionTypes from "../constants/AppActionTypes";
 import AppDispatcher from "../dispatcher/AppDispatcher";
 import SearchConstants from "../constants/SearchConstants";
-import Positions from "../constants/positions.json";
+import { positions } from "../constants/Positions";
 
 var CHANGE_EVENT = "change";
 
@@ -23,7 +23,7 @@ class AppStore extends EventEmitter {
 
   constructor() {
     super();
-    const pos = Positions[Math.floor(Math.random * Positions.length)];
+    const pos = positions[Math.floor(Math.random() * positions.length)];
     appState.lat = pos.lat;
     appState.lng = pos.lng;
   }

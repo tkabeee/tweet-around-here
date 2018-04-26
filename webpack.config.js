@@ -41,14 +41,6 @@ module.exports = {
         ],
         // node_modules は除外
         exclude: /node_modules/,
-      },
-      {
-        test: /\.json$/,
-        use: [
-          {
-            loader: "json-loader"
-          }
-        ]
       }
     ]
   },
