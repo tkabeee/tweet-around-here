@@ -1,9 +1,6 @@
 "use strict";
 
 import React from "react";
-import createReactClass from "create-react-class";
-
-import AppStore from "../stores/AppStore";
 import MapCanvas from "./MapCanvas";
 
 export default class MapSection extends React.Component {

@@ -2,10 +2,10 @@
 
 // import { ReduceStore } from "flux/utils";
 import EventEmitter from "events";
-
 import ActionTypes from "../constants/AppActionTypes";
 import AppDispatcher from "../dispatcher/AppDispatcher";
 import SearchConstants from "../constants/SearchConstants";
+import { positions } from "../constants/Positions";
 
 var CHANGE_EVENT = "change";
 
@@ -23,6 +23,11 @@ class AppStore extends EventEmitter {
 
   constructor() {
     super();
+    const start = positions[Math.floor(Math.random() * positions.length)];
+    appState.lat = start.lat;
+    appState.lng = start.lng;
+    appState.within = start.within;
+    appState.zoom = start.zoom;
   }
 
   getState() {

@@ -1,21 +1,17 @@
 const webpack = require("webpack");
 const path = require("path");
 
-const config = {
-  // entry point
+module.exports = {
+  mode: "development",
   entry: [
-    // "babel-polyfill",
     "./src/app.js",
   ],
   output: {
-    // dest dir
     path: path.resolve(__dirname, "build"),
-    // dest file
     filename: "bundle.js"
   },
-  // http://localhost:8080/
   devServer: {
-    contentBase: "build",
+    contentBase: path.join(__dirname, ''),
     port: 8080,
     inline: true,
     hot: true
@@ -47,14 +43,11 @@ const config = {
   resolve: {
     extensions: [".js"]
   },
-  // ソースマップを有効
-  devtool: "source-map",
-  plugins: [
-    // JS minify
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true
-    })
-  ]
-};
-
-module.exports = config;
+  devtool: "inline-source-map",
+  // plugins: [
+  //   // JS minify
+  //   new webpack.optimize.UglifyJsPlugin({
+  //     sourceMap: true
+  //   })
+  // ]
+}
