@@ -1,8 +1,6 @@
 "use strict";
 
 import React from "react";
-
-import AppStore from "../stores/AppStore";
 import AppActions from "../actions/AppActions";
 
 export default class MapCanvas extends React.Component {
