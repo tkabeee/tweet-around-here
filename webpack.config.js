@@ -2,18 +2,14 @@ const webpack = require("webpack");
 const path = require("path");
 
 module.exports = {
-  // entry point
+  mode: "development",
   entry: [
-    // "babel-polyfill",
     "./src/app.js",
   ],
   output: {
-    // dest dir
     path: path.resolve(__dirname, "build"),
-    // dest file
     filename: "bundle.js"
   },
-  // http://localhost:8080/
   devServer: {
     contentBase: path.join(__dirname, ''),
     port: 8080,
@@ -47,7 +43,6 @@ module.exports = {
   resolve: {
     extensions: [".js"]
   },
-  // ソースマップを有効
   devtool: "inline-source-map",
   // plugins: [
   //   // JS minify
