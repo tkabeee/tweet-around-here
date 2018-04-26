@@ -23,9 +23,11 @@ class AppStore extends EventEmitter {
 
   constructor() {
     super();
-    const pos = positions[Math.floor(Math.random() * positions.length)];
-    appState.lat = pos.lat;
-    appState.lng = pos.lng;
+    const start = positions[Math.floor(Math.random() * positions.length)];
+    appState.lat = start.lat;
+    appState.lng = start.lng;
+    appState.within = start.within;
+    appState.zoom = start.zoom;
   }
 
   getState() {
