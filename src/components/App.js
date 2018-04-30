@@ -16,6 +16,7 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = AppStore.getState();
+    this.xhr;
   }
 
   componentDidMount() {
@@ -36,7 +37,10 @@ export default class App extends React.Component {
       geocode: this.state.lat + "," + this.state.lng + "," + this.state.within + SearchConstants.UNITS,
       rpp: this.state.rpp
     };
-    $.ajax({
+    if (this.xhr) {
+      this.xhr.abort();
+    }
+    this.xhr = $.ajax({
       url: SearchConstants.REQUEST_URL,
       method: "POST",
       dataType: "json",
