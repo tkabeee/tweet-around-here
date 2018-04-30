@@ -537,23 +537,17 @@ header .search-distance {
 header .search-word {
   display: inline-block;
   margin-left: 12px;
-  vertical-align: middle;
 }
 
 header .search-submit {
   display: inline-block;
-  vertical-align: middle;
+  margin-left: 6px;
 }
 
 header .btn-search-submit {
   background-color: white;
   border: none;
   box-shadow: none;
-}
-
-header .btn-search-submit:active {
-  border: none;
-  background-color: transparent;
 }
 
 /*---------------

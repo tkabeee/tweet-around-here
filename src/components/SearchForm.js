@@ -9,7 +9,7 @@ export default class SearchForm extends React.Component {
   constructor(props) {
     super(props);
 
-    this.placeholder = "tweetを検索";
+    this.placeholder = "";
   }
 
   handleQueryFocus(e) {
@@ -52,6 +52,7 @@ export default class SearchForm extends React.Component {
               max={SearchConstants.MAX_CIRCLE_RANGE}
               defaultValue={this.props.within}
               onChange={(e) => this.handleWithinChange(e)}
+              style={{width: 200 + "px"}}
             />
           </span>
           <span className="search-word">
@@ -64,11 +65,15 @@ export default class SearchForm extends React.Component {
               onFocus={(e) => this.handleQueryFocus(e)}
               onBlur={(e) => this.handleQueryBlur(e)}
               onChange={(e) => this.handleQueryChange(e)}
-              style={{width: 230 + "px"}}
+              style={{width: 260 + "px"}}
             />
           </span>
           <span className="search-submit">
-            <button id="submit_post"> 検 索 </button>
+            <button id="submit_post" className="btn-search-submit">
+              <div style={{color: "#000066", fontSize: "2rem"}}>
+                <i className="fas fa-search"></i>
+              </div>
+            </button>
           </span>
         </form>
       </div>

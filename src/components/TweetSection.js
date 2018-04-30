@@ -8,10 +8,33 @@ export default class TweetSection extends React.Component {
   }
 
   render() {
+    const children = this.props.children;
+    if (children.props.tweet.length > 0) {
+      return (
+        <div id="tweetsSection" className="tweet-section">
+          <div id="tweets">
+            {children}
+          </div>
+        </div>
+      );
+    }
+
+    const styleContainer = {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      height: "100%"
+    };
+
+    const styleSpinner = {
+      fontSize: "3em",
+      color: "Tomato"
+    };
+
     return (
-      <div id="tweetsSection" className="tweet-section">
-        <div id="tweets">
-          {this.props.children}
+      <div style={styleContainer}>
+        <div style={styleSpinner}>
+          <i className="fas fa-spinner fa-spin"></i>
         </div>
       </div>
     );

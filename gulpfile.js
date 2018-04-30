@@ -1,44 +1,34 @@
-const gulp = require('gulp')
-const util = require('gulp-util')
-// const rename = require('gulp-rename');
-const webserver = require('gulp-webserver')
+"use strict";
 
-const webpack = require('webpack')
-const webpackConfig = require('./webpack.config')
-const webpackStream = require('webpack-stream')
-const webpackDevServer = require('webpack-dev-server')
+const gulp = require("gulp");
+const plumber = require("gulp-plumber");
+// const compass = require("gulp-compass");
+const sass = require('gulp-sass');
 
-const SCSS_FILES = 'sass/*.scss'
-const SASS_DIR = 'sass'
-const CSS_DIR = 'css'
+const SCSS_FILE = "sass/*.scss";
+const SASS_DIR = "sass";
+const CSS_DIR = "css";
 
-gulp.task('default', ['build'], () => {
- gulp.start('webserver');
-//  gulp.start('webpack-dev-server')
- gulp.watch(['src/**/*.js'], ['build']);
-})
-
-gulp.task('build', () => {
-  return webpackStream(webpackConfig, webpack)
-    .pipe(gulp.dest('build'))
-})
-
-gulp.task("webserver", () => {
-  gulp.src('./')
-    .pipe(webserver({
-      host: 'localhost',
-      port: 8080,
-      livereload: true
+gulp.task("build", function(){
+  gulp.src([SCSS_FILE])
+    .pipe(plumber({
+      errorHandler: function(error) {
+        console.log(error.message);
+        this.emit("end");
+      }
     }))
-})
+    // .pipe(compass({
+    //   sass: SASS_DIR,
+    //   css: CSS_DIR
+    // }))
+    .pipe(sass({outputStyle: "expanded"}))
+    .pipe(gulp.dest(CSS_DIR));
+});
 
-// gulp.task('webpack-dev-server', () => {
-//   const compiler = webpack(webpackConfig)
-//   compiler.plugin('done', () => {
-//   })
-//   new webpackDevServer(compiler, {
-//   }).listen(8080, 'localhost', (err) => {
-//     if (err) throw new util.PluginError('webpack-dev-server', err)
-//     util.log('[webpack-dev-server]', 'http://localhost:8080/webpack-dev-server/index.html')
-//   })
-// })
+gulp.task("watch", function(){
+  gulp.watch([SCSS_FILE], ["build"]);
+});
+
+gulp.task("default", function(){
+  gulp.start("watch");
+});
