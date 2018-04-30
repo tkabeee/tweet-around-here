@@ -25,7 +25,7 @@ export default {
 
   // サークルレンジの最小・最大値
   MIN_CIRCLE_RANGE: 2,
-  MAX_CIRCLE_RANGE: 500,
+  MAX_CIRCLE_RANGE: 300,
 
   // twitter検索用API
   REQUEST_URL: "https://twttr-rest.herokuapp.com/search.php",
